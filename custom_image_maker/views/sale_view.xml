@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="im_view_order_form">
+            <field name="name">im.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <field name="solid"/>
+                    <field name="srv_start_date"/>
+                    <field name="srv_end_date"/>
+                    <field name="percentage" widget="percentage"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

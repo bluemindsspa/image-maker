@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_order_checklist,purchase.order.checklist,model_purchase_order_checklist,,1,1,1,1
+access_purchase_order_cia,purchase.order.cia,model_purchase_order_cia,,1,1,1,1
+access_purchase_order_mn,purchase.order.mn,model_purchase_order_mn,,1,1,1,1
+access_purchase_order_arrivalport,purchase.order.arrivalport,model_purchase_order_arrivalport,,1,1,1,1
+access_purchase_order_plannedwh,purchase.order.plannedwh,model_purchase_order_plannedwh,,1,1,1,1
+access_purchase_order_warehouse,purchase.order.warehouse,model_purchase_order_warehouse,,1,1,1,1
