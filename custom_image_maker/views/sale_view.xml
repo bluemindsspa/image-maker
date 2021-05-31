@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="im_view_order_form">
+            <field name="name">im.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <field name="solid"/>
+                    <field name="srv_start_date"/>
+                    <field name="srv_end_date"/>
+                    <field name="percentage" widget="percentage"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="im_view_quotation_tree" model="ir.ui.view">
+            <field name="name">im.sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <field name="activity_ids" position="after">
+                    <field name="solid"/>
+                    <field name="srv_start_date"/>
+                    <field name="srv_end_date"/>
+                    <field name="validate"/>
+                </field>
+            </field>
+        </record>
+
+        <!--<record id="model_sale_order_action_quotation_sent" model="ir.actions.server">
+            <field name="name">Mark Quotation as Sent</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_quotation_sent()</field>
+        </record>-->
+
+    </data>
+</odoo>
