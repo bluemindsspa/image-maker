@@ -23,7 +23,9 @@
                 <field name="activity_ids" position="after">
                     <field name="solid"/>
                     <field name="srv_start_date"/>
-                    <field name="srv_end_date"/>
+<!--                    <field name="srv_end_date"/>-->
+                    <field name="validate"/>
+                    <field name="estado"/>
                     <field name="validate"/>
                 </field>
             </field>
