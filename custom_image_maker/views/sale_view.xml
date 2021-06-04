@@ -11,7 +11,6 @@
                     <field name="srv_start_date"/>
                     <field name="srv_end_date"/>
                     <field name="percentage" widget="percentage"/>
-                    <field name="percentage" widget="percentage"/>
                 </field>
             </field>
         </record>
