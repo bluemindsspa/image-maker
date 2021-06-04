@@ -14,4 +14,8 @@ class SaleOrder(models.Model):
         ('solid', 'Solid'),
         ('stretch', 'Stretch'),
         ('best', 'Best Case')
+<<<<<<< HEAD
     ])
+=======
+    ])
+>>>>>>> testing-im
