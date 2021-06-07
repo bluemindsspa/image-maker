@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
     srv_start_date = fields.Date('Fecha estimada de inicio')
     srv_end_date = fields.Date('Fecha fin de servicios')
     percentage = fields.Float("Porcentaje")
-    validate = fields.Boolean('Validar')
+    validate = fields.Boolean('Validar', default=False)
     estado = fields.Selection(selection=[
         ('solid', 'Solid'),
         ('stretch', 'Stretch'),

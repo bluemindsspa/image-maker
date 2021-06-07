@@ -6,11 +6,17 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+                    <attribute name="attrs">
+                        {'invisible': [('validate', '=', False)]}
+                    </attribute>
+                </xpath>
                 <field name="payment_term_id" position="after">
                     <field name="solid"/>
                     <field name="srv_start_date"/>
                     <field name="srv_end_date"/>
 <!--                    <field name="percentage" widget="percentage"/>-->
+                    <field name="validate"/>
                 </field>
             </field>
         </record>
