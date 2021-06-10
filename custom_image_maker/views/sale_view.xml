@@ -14,10 +14,6 @@
                         {'invisible': [('validate', '=', False)]}
                     </attribute>
                 </xpath>
-                <!--<button name="action_quotation_send" position="replace">
-                    <button name="action_quotation_send" string="Enviar por correo" type="object" states="draft"
-                            class="btn-primary" attrs="{'invisible': [('validate','=',False)]}"/>
-                </button>-->
                 <xpath expr="//button[@name='action_confirm']" position="attributes">
                     <attribute name="attrs">
                         {'invisible': [('state', 'not in', ['sent']), ('validate', '=', False)]}
