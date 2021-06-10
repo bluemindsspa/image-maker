@@ -6,11 +6,35 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//button[10]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+                    <attribute name="attrs">
+                        {'invisible': [('validate', '=', False)]}
+                    </attribute>
+                </xpath>
+                <!--<button name="action_quotation_send" position="replace">
+                    <button name="action_quotation_send" string="Enviar por correo" type="object" states="draft"
+                            class="btn-primary" attrs="{'invisible': [('validate','=',False)]}"/>
+                </button>-->
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="attrs">
+                        {'invisible': [('state', 'not in', ['sent']), ('validate', '=', False)]}
+                    </attribute>
+                </xpath>
                 <field name="payment_term_id" position="after">
+                    <field name="estado"/>
                     <field name="solid"/>
                     <field name="srv_start_date"/>
-                    <field name="srv_end_date"/>
+<!--                    <field name="srv_end_date"/>-->
 <!--                    <field name="percentage" widget="percentage"/>-->
+                    <field name="validate"/>
+                    <label for="periodo"/>
+                    <div class="o_row" name="periodo">
+                        <field name="periodo"/>
+                        <span>Meses</span>
+                    </div>
                 </field>
             </field>
         </record>
@@ -26,7 +50,6 @@
 <!--                    <field name="srv_end_date"/>-->
                     <field name="validate"/>
                     <field name="estado"/>
-                    <field name="validate"/>
                 </field>
             </field>
         </record>

@@ -32,6 +32,7 @@ Se crean campos varios en cabecera de orden de venta:
         # 'security/ir.model.access.csv',
         # 'data/purchase_data.xml',
         'views/sale_view.xml',
+        'report/sale_report_templates.xml',
     ],
 
 }
