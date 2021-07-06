@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_type_of_project_form" model="ir.ui.view">
+        	<field name="name">type.of.project.form</field>
+        	<field name="model">type_of_project</field>
+        	<field name="arch" type="xml">
+            	<form>
+                    <sheet>
+                	   <group colspan="2" col="4">
+                    	   <field name="name"/>
+                	   </group>
+                    </sheet>
+            	</form>
+        	</field>
+    	</record>
+
+    	<record id="view_type_of_project_tree" model="ir.ui.view">
+        	<field name="name">type.of.project.tree</field>
+        	<field name="model">type_of_project</field>
+        	<field name="arch" type="xml">
+            	<tree editable="top">
+                	<field name="name"/>
+            	</tree>
+        	</field>
+    	</record>
+
+    	<record id="action_type_of_project" model="ir.actions.act_window">
+        	<field name="name">Type of project</field>
+        	<field name="res_model">type_of_project</field>
+        	<field name="view_mode">tree,form</field>
+    	</record>
+
+    	<menuitem 
+    		id="menu_type_of_project" 
+    		name="Type of project"
+            parent="hr_recruitment.menu_hr_recruitment_configuration" 
+            action="action_type_of_project"/>
+	</data>
+</odoo>

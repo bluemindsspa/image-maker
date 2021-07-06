@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_type_of_project,type_of_project,model_type_of_project,base.group_user,1,1,1,1
+access_account_item,account_item,model_account_item,base.group_user,1,1,1,1
+access_location,location,model_location,base.group_user,1,1,1,1
+access_type_of_oportunities,type_of_oportunities,model_type_of_oportunities,base.group_user,1,1,1,1
+access_length_of_service,length_of_service,model_length_of_service,base.group_user,1,1,1,1
+access_income_ceiling,income_ceiling,model_income_ceiling,base.group_user,1,1,1,1
+access_languages,languages,model_languages,base.group_user,1,1,1,1
+access_exclusive_technical_requirements,exclusive_technical_requirements,model_exclusive_technical_requirements,base.group_user,1,1,1,1
+access_desirable_technical_requirements,desirable_technical_requirements,model_desirable_technical_requirements,base.group_user,1,1,1,1
+access_country_search,country_search,model_country_search,base.group_user,1,1,1,1
+access_soft_skills,soft_skills,model_soft_skills,base.group_user,1,1,1,1

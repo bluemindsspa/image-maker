@@ -1,0 +1,533 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* recruitment_applications
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-06 03:50+0000\n"
+"PO-Revision-Date: 2021-07-06 03:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_account_item
+#: model:ir.ui.menu,name:recruitment_applications.menu_account_item
+msgid "Account Item"
+msgstr "Rubro de la cuenta"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__account_item_id
+msgid "Account item"
+msgstr "Rubro de la cuenta"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__additional_benefits
+msgid "Additional benefits"
+msgstr "Beneficios adicionales"
+
+#. module: recruitment_applications
+#: model_terms:ir.ui.view,arch_db:recruitment_applications.view_recruitment_applications_form
+msgid "Application Data"
+msgstr "Datos de la Solicitud"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__application_status
+msgid "Application status"
+msgstr "Estado de la solicitud"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__area_im_id
+msgid "Area IM"
+msgstr "Area IM"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__assigned
+msgid "Assigned:"
+msgstr "Asignado"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__can_you_reside_abroad
+msgid "Can you reside abroad ?"
+msgstr "¿Puede residir en el extranjero?"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__partner_id
+msgid "Client"
+msgstr "Cliente"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_sale_order__count_sale_order
+msgid "Contador"
+msgstr ""
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_country_search
+#: model:ir.ui.menu,name:recruitment_applications.menu_country_search
+msgid "Country search"
+msgstr "Paises"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_location__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities__create_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_location__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities__create_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__customer_leader_id
+msgid "Customer leader"
+msgstr "Líder de los clientes"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__customer_request_document
+msgid "Customer request document"
+msgstr "Documento de solicitud del cliente?"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__desirable_academic_requirements
+msgid "Desirable academic requirements"
+msgstr "Requisitos académicos deseables"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_desirable_technical_requirements
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements__name
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__desirable_technical_requirements_id
+#: model:ir.ui.menu,name:recruitment_applications.menu_desirable_technical_requirements
+msgid "Desirable technical requirements"
+msgstr "Requisitos técnicos deseables"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_location__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_sale_order__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities__display_name
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__archivo
+msgid "Documento del cliente"
+msgstr "Documento del cliente"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__estimated_date_of_entry
+msgid "Estimated date of entry"
+msgstr "Fecha estimada de entrada"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_exclusive_technical_requirements
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements__name
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__exclusive_technical_requirements_id
+#: model:ir.ui.menu,name:recruitment_applications.menu_exclusive_technical_requirements
+msgid "Exclusive technical requirements"
+msgstr "Requisitos técnicos excluyentes"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__friday
+msgid "Friday"
+msgstr "Viernes"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_location__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_sale_order__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities__id
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search__name
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__country_search_id
+msgid "In which country you can search"
+msgstr "En qué país se puede buscar"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__includes_referral
+msgid "Includes referral?"
+msgstr "¿Incluye referido?"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_income_ceiling
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__income_ceiling_id
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling__name
+#: model:ir.ui.menu,name:recruitment_applications.menu_income_ceiling
+msgid "Income ceiling"
+msgstr "Renta tope"
+
+#. module: recruitment_applications
+#: model_terms:ir.ui.view,arch_db:recruitment_applications.view_recruitment_applications_form
+msgid "Information Client"
+msgstr "Información del cliente"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_hr_job
+msgid "Job Position"
+msgstr "Puesto de trabajo"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__job_functions
+msgid "Job functions"
+msgstr "Funciones del cargo"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages__name
+msgid "Language"
+msgstr "Idioma"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_languages
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__languages_id
+#: model:ir.ui.menu,name:recruitment_applications.menu_languages
+msgid "Languages"
+msgstr "Idiomas"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_location____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_sale_order____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities____last_update
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_location__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities__write_uid
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_country_search__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_desirable_technical_requirements__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_exclusive_technical_requirements__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_income_ceiling__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_languages__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_location__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities__write_date
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project__write_date
+msgid "Last Updated on"
+msgstr "Última actualización"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_length_of_service
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__length_of_service_id
+#: model:ir.model.fields,field_description:recruitment_applications.field_length_of_service__name
+#: model:ir.ui.menu,name:recruitment_applications.menu_length_of_service
+msgid "Length of service"
+msgstr "Duración del servicio"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_location
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__location_id
+#: model:ir.model.fields,field_description:recruitment_applications.field_location__name
+#: model:ir.ui.menu,name:recruitment_applications.menu_location
+msgid "Location"
+msgstr "Localización"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__maker_to_replace_id
+msgid "Maker to replace "
+msgstr "Maker a reemplazar"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__monday
+msgid "Monday"
+msgstr "Lunes"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_account_item__name
+msgid "Name of account item"
+msgstr "Nombre del rubro de la cuenta"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_project__name
+msgid "Name of project type"
+msgstr "Nombre del tipo de proyecto"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_type_of_oportunities
+#: model:ir.model.fields,field_description:recruitment_applications.field_type_of_oportunities__name
+msgid "Oportunities"
+msgstr "Oportunidades"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__priority
+msgid "Priority"
+msgstr "Prioridad"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__proposal_reference_id
+msgid "Proposal reference"
+msgstr "Propuesta de referencia"
+
+#. module: recruitment_applications
+#: model_terms:ir.ui.view,arch_db:recruitment_applications.view_recruitment_applications_form
+msgid "Recruitment applications"
+msgstr "Solicitudes de contratación"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__referido
+msgid "Referido"
+msgstr "Referido"
+
+#. module: recruitment_applications
+#: model_terms:ir.ui.view,arch_db:recruitment_applications.view_recruitment_applications_form
+msgid "Request details"
+msgstr "Detalles de la solicitud"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__revisor_id
+msgid "Revisor"
+msgstr "Revisor"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__rol
+msgid "Rol"
+msgstr "Rol"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__saturday
+msgid "Saturday"
+msgstr "Sábado"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__since
+msgid "Since"
+msgstr "Desde"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_soft_skills
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__soft_skills_id
+#: model:ir.model.fields,field_description:recruitment_applications.field_soft_skills__name
+#: model:ir.ui.menu,name:recruitment_applications.menu_soft_skills
+msgid "Soft skills"
+msgstr "Habilidades blandas"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__solicitante_id
+msgid "Solicitante"
+msgstr "Solicitante"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_sale_order__recruitment_ids
+msgid "Solicitud"
+msgstr "Solicitud"
+
+#. module: recruitment_applications
+#: model_terms:ir.ui.view,arch_db:recruitment_applications.view_order_form_inherit_recruitment
+msgid "Solicitudes"
+msgstr "Solicitudes"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__sunday
+msgid "Sunday"
+msgstr "Domingo"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__thursday
+msgid "Thursday"
+msgstr "Jueves"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__tuesday
+msgid "Tuesday"
+msgstr "Martes"
+
+#. module: recruitment_applications
+#: model:ir.ui.menu,name:recruitment_applications.menu_type_of_oportunities
+msgid "Type of Oportunities"
+msgstr "Tipo de oportunidades"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__type_of_opportunities_id
+msgid "Type of opportunities"
+msgstr "Tipo de oportunidades"
+
+#. module: recruitment_applications
+#: model:ir.actions.act_window,name:recruitment_applications.action_type_of_project
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__type_of_project_id
+#: model:ir.ui.menu,name:recruitment_applications.menu_type_of_project
+msgid "Type of project"
+msgstr "Tipo de proyecto"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__until
+msgid "Until"
+msgstr "Hasta"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__vacancies
+msgid "Vacancies"
+msgstr "Vacantes"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__wednesday
+msgid "Wednesday"
+msgstr "Miércoles"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__work_address
+msgid "Work address"
+msgstr "Dirección de trabajo"
+
+#. module: recruitment_applications
+#: model_terms:ir.ui.view,arch_db:recruitment_applications.view_recruitment_applications_form
+msgid "Working day"
+msgstr "Jornada"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__working_hours
+msgid "Working hours"
+msgstr "Horario de trabajo"
+
+#. module: recruitment_applications
+#: model:ir.model.fields,field_description:recruitment_applications.field_hr_job__years_of_experience
+msgid "Years of experience"
+msgstr "Años de experiencia"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_account_item
+msgid "account_item"
+msgstr "Rubros de la cuenta"
+
+#. module: recruitment_applications
+#: model:ir.model.fields.selection,name:recruitment_applications.selection__hr_job__priority__3
+msgid "complicated"
+msgstr "complicado"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_country_search
+msgid "country_search"
+msgstr "Pais en que se puede buscar"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_desirable_technical_requirements
+msgid "desirable_technical_requirements"
+msgstr "Requisitos técnicos deseables"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_exclusive_technical_requirements
+msgid "exclusive_technical_requirements"
+msgstr "Requisitos técnicos excluyentes"
+
+#. module: recruitment_applications
+#: model:ir.model.fields.selection,name:recruitment_applications.selection__hr_job__priority__2
+msgid "hard"
+msgstr "difícil"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_income_ceiling
+msgid "income_ceiling"
+msgstr "Renta tope"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_languages
+msgid "languages"
+msgstr "Idiomas"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_length_of_service
+msgid "length_of_service"
+msgstr "Duración del servicio"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_location
+msgid "location"
+msgstr "Localización"
+
+#. module: recruitment_applications
+#: model:ir.model.fields.selection,name:recruitment_applications.selection__hr_job__priority__1
+msgid "normal"
+msgstr "normal"
+
+#. module: recruitment_applications
+#: model:ir.model.fields.selection,name:recruitment_applications.selection__hr_job__priority__0
+msgid "short"
+msgstr "corto"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_soft_skills
+msgid "soft_skills"
+msgstr "Habilidades blandas"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_type_of_oportunities
+msgid "type_of_oportunities"
+msgstr "Tipo de oportunidades"
+
+#. module: recruitment_applications
+#: model:ir.model,name:recruitment_applications.model_type_of_project
+msgid "type_of_project"
+msgstr "Tipo de proyectos"

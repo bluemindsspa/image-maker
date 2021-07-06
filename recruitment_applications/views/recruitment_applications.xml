@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="view_recruitment_applications_form" model="ir.ui.view">
+            <field name="name">hr.job.form1</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page" position="replace">
+                    <page string="Recruitment applications ">
+                        <group>
+                            <div attrs="{'invisible': [('state', '!=', 'recruit')]}">
+                                <label for="description"/>
+                                <field name="description"/>
+                            </div>
+                        </group>
+                        <center>
+                            <separator string="Recruitment applications" colspan="2"/>
+                        </center>
+                        <group>
+                            <group string="Information Client">
+                                <field name="partner_id"/>
+                                <field name="account_item_id" options="{'no_create': True}"/>
+                                <field name="customer_leader_id" options="{'no_create': True}"/>
+                                <field name="proposal_reference_id" options="{'no_create': True}" domain="[('partner_id', '=', partner_id)]"/>
+                                <field name="work_address"/>
+                                <label for="since" string="Working day"/>
+                                <div>
+                                    <field name="since" widget="float_time" class="oe_inline" nolabel="1"/>
+                                    <field name="until" widget="float_time" class="oe_inline" nolabel="1"/>
+                                </div>
+                                    <div>
+                                        <label for="monday" string="lu"/>
+                                            <field name="monday" class="oe_inline" nolabel="1"/>
+                                        <label for="tuesday" string="Ma"/>
+                                            <field name="tuesday" class="oe_inline" nolabel="1"/>
+                                        <label for="wednesday" string="Mi"/>
+                                            <field name="wednesday" class="oe_inline" nolabel="1"/>
+                                        <label for="thursday" string="Ju"/>
+                                            <field name="thursday" class="oe_inline" nolabel="1"/>
+                                        <label for="friday" string="Vi"/>
+                                            <field name="friday" class="oe_inline" nolabel="1"/>
+                                        <label for="saturday" string="Sa"/>
+                                            <field name="saturday" class="oe_inline" nolabel="1"/>
+                                        <label for="sunday" string="Do"/>
+                                            <field name="sunday" class="oe_inline" nolabel="1"/>
+                                    </div>
+                            </group>
+
+                                <!--div class="col-12 bg-warning">
+                                    <label for="monday" string="lu"/>
+                                    <field name="monday"/>
+                                    <label for="tuesday" string="Ma"/>
+                                    <field name="tuesday"/>
+                                    <label for="wednesday" string="Mi"/>
+                                    <field name="wednesday"/>
+                                    <label for="thursday" string="Ju"/>
+                                    <field name="thursday"/>
+                                    <label for="friday" string="Vi"/>
+                                    <field name="friday"/>
+                                    <label for="saturday" string="Sa"/>
+                                    <field name="saturday"/>
+                                    <label for="sunday" string="Do"/>
+                                    <field name="sunday"/>
+                                </div-->
+                            <group string="Application Data">
+                                <field name="solicitante_id" readonly="1"/>
+                                <field name="type_of_opportunities_id" options="{'no_create': True}"/>
+                                <field name="maker_to_replace_id" options="{'no_create': True}"/>
+                                <field name="area_im_id" options="{'no_create': True}"/>
+                                <field name="revisor_id" options="{'no_create': True}"/>
+                                <field name="assigned" widget="many2many_tags"/>
+                                <field name="application_status"/>
+                                <field name="priority" widget="priority"/>
+                            </group>
+                        </group>
+                        <group string="Request details" colspan="2" col="4">
+                            <field name="type_of_project_id" options="{'no_create': True}"/>
+                            <field name="customer_request_document" widget="boolean_toggle"/>
+                            <field name="length_of_service_id" options="{'no_create': True}"/>
+                            <field name="archivo" attrs="{'invisible': [('customer_request_document', '=', False)]}"/>
+                            <field name="rol"/>
+                            <field name="income_ceiling_id" options="{'no_create': True}"/>
+                            <field name="job_functions"/>
+                            <field name="years_of_experience"/>
+                            <field name="estimated_date_of_entry"/>
+                            <field name="can_you_reside_abroad" widget="boolean_toggle"/>
+                            <field name="country_search_id" widget="many2many_tags"/>
+                            <field name="includes_referral" widget="boolean_toggle"/>
+                            <field name="location_id" options="{'no_create': True}"/>
+                            <field name="referido" attrs="{'invisible': [('includes_referral', '=', False)]}"/>
+                            <field name="vacancies"/>
+                        </group>
+                        <group>
+                            <field name="additional_benefits"/>
+                        </group>
+                        <group colspan="2" col="4">
+                            <field name="exclusive_technical_requirements_id" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="desirable_academic_requirements"/>
+                            <field name="desirable_technical_requirements_id" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="soft_skills_id" widget="many2many_tags"/>
+                            <field name="languages_id" options="{'no_create': True}"/>
+                        </group>
+                        <group colspan="2" col="4">
+                        </group>
+                        <group colspan="2" col="4">
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

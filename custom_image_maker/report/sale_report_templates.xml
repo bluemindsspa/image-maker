@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="im_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div t-if="doc.srv_start_date" class="col-auto mw-100 mb-2">
+                <strong>Fecha estimada de inicio:</strong>
+                <p class="m-0" t-field="doc.srv_start_date"/>
+            </div>
+            <div t-if="doc.periodo" class="col-auto mw-100 mb-2">
+                <strong>Período:</strong>
+                <span class="m-0" t-field="doc.periodo"/>
+                <span>Meses</span>
+            </div>
+        </xpath>
+    </template>
+</odoo>

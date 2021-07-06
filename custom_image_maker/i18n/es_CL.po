@@ -1,0 +1,300 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* custom_image_maker
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-27 20:09+0000\n"
+"PO-Revision-Date: 2021-06-27 16:18-0400\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: es_CL\n"
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.im_report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.im_view_order_form
+msgid "<span>Meses</span>"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.im_report_saleorder_document
+msgid "<strong>Fecha estimada de inicio:</strong>"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.im_report_saleorder_document
+msgid "<strong>Período:</strong>"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.level_disc_res_config_settings_view_form
+msgid "Administrar niveles de aprobacion de descuentos"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__solid
+msgid "BEST ESTIMATE"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields.selection,name:custom_image_maker.selection__sale_order__estado__best
+msgid "Best Case"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_purchase_order_line__invoice_status
+msgid "Billing Status"
+msgstr "Estado de facturación"
+
+#. module: custom_image_maker
+#: model:ir.model,name:custom_image_maker.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model,name:custom_image_maker.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_company__discount_levels
+msgid "Dicount_leves"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_company__discount_level
+msgid "Discount levels"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_company__display_name
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_users__display_name
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam__display_name
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__imteam_id
+msgid "Equipo"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model,name:custom_image_maker.model_sale_imteam
+msgid "Equipo de trabajo"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__estado
+msgid "Estado"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__srv_start_date
+msgid "Fecha estimada de inicio"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__srv_end_date
+msgid "Fecha fin de servicios"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__higher_discount
+msgid "Higher"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_company__id
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_config_settings__id
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_users__id
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam__id
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__id
+msgid "ID"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.level_disc_res_config_settings_view_form
+msgid "Importe"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_users__approve_discount
+msgid "Importe Aprob. Desc."
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_purchase_order_line____last_update
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_company____last_update
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_users____last_update
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam____last_update
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.level_disc_res_config_settings_view_form
+msgid "Levels approve discounts"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__lock
+msgid "Lock"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_config_settings__discount_level
+#: model:ir.model.fields,field_description:custom_image_maker.field_res_config_settings__discount_levels
+msgid "Niveles de descuentos"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.actions.act_window,help:custom_image_maker.purchase_line_form_action
+msgid "No purchase order found. Let's create one!"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_imteam__name
+msgid "Nombre"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.actions.act_window,help:custom_image_maker.purchase_line_form_action
+msgid ""
+"Once you ordered your products to your supplier, confirm your request for "
+"quotation and it will turn into a purchase order."
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_purchase_order_line__name_order
+msgid "Order Name"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__periodo
+msgid "Período"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__percentage
+msgid "Porcentaje"
+msgstr ""
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.purchase_order_line_view_tree
+msgid "Purchase Order"
+msgstr "Orden de Compra"
+
+#. module: custom_image_maker
+#: model:ir.model,name:custom_image_maker.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Linea de Orden de Compra"
+
+#. module: custom_image_maker
+#: model:ir.actions.act_window,name:custom_image_maker.purchase_line_form_action
+#: model:ir.ui.menu,name:custom_image_maker.menu_purchase_form_action
+msgid "Purchase Orders Lines"
+msgstr "Lineas de Ordenes de Compra"
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_purchase_order_line__user_id
+msgid "Purchase Representative"
+msgstr "Representante del Proveedor"
+
+#. module: custom_image_maker
+#: model_terms:ir.ui.view,arch_db:custom_image_maker.purchase_order_line_view_tree
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: custom_image_maker
+#: model:ir.model.fields,help:custom_image_maker.field_purchase_order_line__origin
+msgid ""
+"Reference of the document that generated this purchase order request (e.g. a "
+"sales order)"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model,name:custom_image_maker.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields.selection,name:custom_image_maker.selection__sale_order__estado__solid
+msgid "Solid"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_purchase_order_line__origin
+msgid "Source Document"
+msgstr "Documento origen"
+
+#. module: custom_image_maker
+#: model:ir.model.fields.selection,name:custom_image_maker.selection__sale_order__estado__stretch
+msgid "Stretch"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model,name:custom_image_maker.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:res.groups,name:custom_image_maker.group_im_validation
+msgid "Usuario validador (IM)"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:res.groups,name:custom_image_maker.group_discount_one
+msgid "Validador descuento 1"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:res.groups,name:custom_image_maker.group_discount_two
+msgid "Validador descuento 2"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__validate
+msgid "Validar"
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:custom_image_maker.field_sale_order__discount_validate
+msgid "Validar Desc."
+msgstr ""
+
+#. module: custom_image_maker
+#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__partner_id
+msgid "Vendor"
+msgstr "Vendedor"
