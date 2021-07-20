@@ -11,8 +11,8 @@
             <xpath expr="//group[2]" position="before">
                 <group>
                     <field name="license_ids" string="Licencias" widget="many2many_tags"/>
-                    <field name="imei_id" string="Imei"/>
-                    <field name="phone" string="N°- de Teléfono"/>
+                    <field name="imei" string="Imei"/>
+                    <field name="phone" string="N°- de Teléfono" widget="phone"/>
                     <field name="description" string="Observaciones"/>
                 </group>
             </xpath>

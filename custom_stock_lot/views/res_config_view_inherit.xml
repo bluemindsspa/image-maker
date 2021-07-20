@@ -1,0 +1,28 @@
+<odoo>
+  <data>
+
+        <record id="view_license_tree" model="ir.ui.view">
+            <field name="name">stock.production.lot.tree</field>
+            <field name="model">license.news</field>
+            <field name="arch" type="xml">
+                <tree string="Licenses">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_stock_config_settings_inherit" model="ir.actions.act_window">
+            <field name="name">Licencias</field>
+            <field name="res_model">license.news</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" ref="view_license_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new License
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_stock_general_settings_inherit" name="Licencias" parent="stock.menu_stock_config_settings"
+            sequence="0" action="action_stock_config_settings_inherit"/>
+  </data>
+</odoo>
