@@ -25,7 +25,7 @@ Se crean campos varios en cabecera de orden de venta:
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale'],
+    'depends': ['base', 'sale', 'sale_management', 'product'],
 
     # always loaded
     'data': [
@@ -33,7 +33,9 @@ Se crean campos varios en cabecera de orden de venta:
         'security/security.xml',
         'views/res_config_settings_views.xml',
         'views/res_users_views.xml',
+        'views/product_template_views.xml',
         'views/sale_view.xml',
+        'views/sale_order_template_views.xml',
         'report/sale_report_templates.xml',
         # 'views/purchase_views.xml',
     ],

@@ -29,7 +29,7 @@ class PurchaseOrder(models.Model):
                     if order._approval_allowed():
                         order.button_approve()
                     elif order.user_has_groups('purchase.group_purchase_manager') or order.user_has_groups('purchase_approval_levels.group_purchase_boss'):
-                        order.write({'state': 'director'})
+                        order.button_approve()
                     else:
                         order.write({'state': 'to approve'})
                     if order.partner_id not in order.message_partner_ids:

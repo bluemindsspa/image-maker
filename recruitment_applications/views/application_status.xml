@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_application_status_form" model="ir.ui.view">
+        	<field name="name">application.status.form</field>
+        	<field name="model">application_status</field>
+        	<field name="arch" type="xml">
+            	<form>
+                    <sheet>
+                	   <group colspan="2" col="4">
+                    	   <field name="name"/>
+                	   </group>
+                    </sheet>
+            	</form>
+        	</field>
+    	</record>
+
+    	<record id="view_application_status_tree" model="ir.ui.view">
+        	<field name="name">application.status.tree</field>
+        	<field name="model">application_status</field>
+        	<field name="arch" type="xml">
+            	<tree editable="top">
+                	<field name="name"/>
+            	</tree>
+        	</field>
+    	</record>
+
+    	<record id="action_application_status" model="ir.actions.act_window">
+        	<field name="name">Application status</field>
+        	<field name="res_model">application_status</field>
+        	<field name="view_mode">tree,form</field>
+    	</record>
+
+    	<menuitem 
+    		id="menu_application_status" 
+    		name="Application status"
+            parent="hr_recruitment.menu_hr_recruitment_configuration" 
+            action="action_application_status"/>
+	</data>
+</odoo>

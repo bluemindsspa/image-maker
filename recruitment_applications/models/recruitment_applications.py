@@ -6,7 +6,9 @@ class Job(models.Model):
     _inherit = "hr.job"
 
     rol = fields.Char(string="Rol")
-    application_status = fields.Char(string="Application status")
+    application_status_id = fields.Many2one(
+        'application_status',
+        string="Application status")
     proposal_reference_id = fields.Many2one(
         'sale.order',
         string="Proposal reference")
@@ -64,7 +66,7 @@ class Job(models.Model):
         'income_ceiling',
         string="Income ceiling")
     years_of_experience = fields.Integer(string="Years of experience")
-    languages_id = fields.Many2one(
+    languages_id = fields.Many2many(
         'languages',
         string="Languages")
     type_of_project_id = fields.Many2one(
@@ -73,12 +75,11 @@ class Job(models.Model):
     job_functions = fields.Char(string="Job functions")
     exclusive_technical_requirements_id = fields.Many2many(
         'exclusive_technical_requirements',
-        string="Exclusive technical requirements")
+        string="Technical requirements")
     desirable_academic_requirements = fields.Char(
         string="Desirable academic requirements")
-    desirable_technical_requirements_id = fields.Many2many(
-        'desirable_technical_requirements',
-        string="Desirable technical requirements")
+    # desirable_technical_requirements_id = fields.Char(
+    #     string="Desirable technical requirements")
     soft_skills_id = fields.Many2many(
         'soft_skills',
         string="Soft skills")

@@ -20,6 +20,7 @@ class SaleOrder(models.Model):
         ]
         res['context'] = {
             'default_proposal_reference_id': self.id,
+            'default_partner_id': self.partner_id.id
         }
         return res
 

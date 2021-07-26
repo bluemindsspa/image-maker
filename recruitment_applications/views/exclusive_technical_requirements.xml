@@ -33,7 +33,7 @@
 
     	<menuitem 
     		id="menu_exclusive_technical_requirements" 
-    		name="Exclusive technical requirements"
+    		name="Technical requirements"
             parent="hr_recruitment.menu_hr_recruitment_configuration" 
             action="action_exclusive_technical_requirements"/>
 	</data>

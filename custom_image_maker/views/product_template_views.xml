@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- Inherit Form View to Modify it -->
+    <record id="project_product_template_form_view" model="ir.ui.view">
+        <field name="name">project.product.template.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="is_a_project"/>
+                    <label for="is_a_project"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    </data>
+</odoo>

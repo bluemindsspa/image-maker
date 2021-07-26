@@ -27,10 +27,10 @@
         'views/income_ceiling.xml',
         'views/languages.xml',
         'views/exclusive_technical_requirements.xml',
-        'views/desirable_technical_requirements.xml',
         'views/country_search.xml',
         'views/soft_skills.xml',
         'views/sale_views.xml',
+        'views/application_status.xml',
     ],
 
 }
