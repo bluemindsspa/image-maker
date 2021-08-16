@@ -3,12 +3,14 @@ from odoo import api, fields, models
 
 
 class Job(models.Model):
-    _inherit = "hr.job"
+    _name = 'hr.job'
+    _inherit = ['hr.job', 'mail.thread']
 
-    rol = fields.Char(string="Rol")
+    rol_id = fields.Many2one('rol', string="Rol")
     application_status_id = fields.Many2one(
         'application_status',
-        string="Application status")
+        string="Application status",
+        tracking=True)
     proposal_reference_id = fields.Many2one(
         'sale.order',
         string="Proposal reference")
@@ -32,7 +34,7 @@ class Job(models.Model):
         string="Account item")
     location_id = fields.Many2one(
         'location',
-        string="Location")
+        string="Customer location")
     vacancies = fields.Integer(string="Vacancies")
     work_address = fields.Many2one(
         'res.partner',
@@ -73,15 +75,12 @@ class Job(models.Model):
         'type_of_project',
         string="Type of project")
     job_functions = fields.Char(string="Job functions")
-    exclusive_technical_requirements_id = fields.Many2many(
-        'exclusive_technical_requirements',
+    exclusive_technical_requirements = fields.Text(
         string="Technical requirements")
     desirable_academic_requirements = fields.Char(
         string="Desirable academic requirements")
-    # desirable_technical_requirements_id = fields.Char(
-    #     string="Desirable technical requirements")
-    soft_skills_id = fields.Many2many(
-        'soft_skills',
+    desirable_technical_requirements = fields.Text(string="Desirable technical requirements")
+    soft_skills = fields.Text(
         string="Soft skills")
     can_you_reside_abroad = fields.Boolean(string="Can you reside abroad ?")
     country_search_id = fields.Many2many(
