@@ -21,7 +21,7 @@ class SaleOrder(models.Model):
         ('best', 'Best Case'),
         ('lost', 'No ganado')
     ])
-    periodo = fields.Integer('Período')
+    periodo = fields.Float('Período')
     imteam_id = fields.Many2one('sale.imteam', string='Equipo')
 
     def _compute_validate_readonly(self):
