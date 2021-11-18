@@ -21,6 +21,7 @@ class SaleOrder(models.Model):
 
     def _prepare_invoice(self):
         today = date.today()
+        uf_rate = 1
         res = super(SaleOrder, self)._prepare_invoice()
         if self.currency_id.name == 'UF':
             uf_rate = self.currency_id.rate or 1
