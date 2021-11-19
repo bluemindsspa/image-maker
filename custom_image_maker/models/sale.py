@@ -105,7 +105,7 @@ class SaleOrder(models.Model):
                     invoice_item_sequence += 1
                 if invoice_item_sequence == 0:
                     invoice_line_vals.append(
-                        (0, 0, line._prepare_invoice_line(
+                        (0, 0, line._prepare_one_service_invoice_line(
                             sequence=invoice_item_sequence,
                         )),
                     )
@@ -114,7 +114,11 @@ class SaleOrder(models.Model):
                     invoice_line_vals[0][2]['price_unit'] += line.price_unit
                 invoice_item_sequence += 1
 
-            # product_id = self.env['product.product'].search([('name', 'ilike', 'Honorarios Prest. Servicios')])
+            if self.currency_id.name == 'UF':
+                if self.currency_id.rate > 0:
+                    rate = 1 / self.currency_id.rate
+                    invoice_line_vals[0][2]['price_unit'] = invoice_line_vals[0][2]['price_unit'] * rate
+
             invoice_line_vals[0][2]['name'] = self.product_id.name
             invoice_line_vals[0][2]['product_id'] = self.product_id.id
 
@@ -208,6 +212,34 @@ class SaleOrderLine(models.Model):
             else:
                 products = self.env['product.product'].search([('sale_ok', '=', True,), ('company_id', '=', False)])
             return {'domain': {'product_id': [('id', 'in', products.ids)]}}
+
+    def _prepare_one_service_invoice_line(self, **optional_values):
+        """
+        Prepare the dict of values to create the new invoice line for a sales order line.
+
+        :param qty: float quantity to invoice
+        :param optional_values: any parameter that should be added to the returned invoice line
+        """
+        self.ensure_one()
+        res = {
+            'display_type': self.display_type,
+            'sequence': self.sequence,
+            'name': self.name,
+            'product_id': self.product_id.id,
+            'product_uom_id': self.product_uom.id,
+            'quantity': self.qty_to_invoice,
+            'discount': self.discount,
+            'price_unit': self.price_unit,
+            'tax_ids': [(6, 0, self.tax_id.ids)],
+            'analytic_account_id': self.order_id.analytic_account_id.id,
+            'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
+            'sale_line_ids': [(4, self.id)],
+        }
+        if optional_values:
+            res.update(optional_values)
+        if self.display_type:
+            res['account_id'] = False
+        return res
 
 
 class SaleTeam(models.Model):
