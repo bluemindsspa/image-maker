@@ -196,6 +196,7 @@ class L10nClEdiUtilMixin(models.AbstractModel):
             self._report_connection_err(_('Sending DTE to SII failed due to:') + '<br /> %s' % error)
             digital_signature.last_token = False
             return False
+        print(response.data)
         return response.data
         # we tried to use requests. The problem is that we need the Content-Lenght and seems that requests
         # had the ability to send this provided the file is in binary mode, but did not work.

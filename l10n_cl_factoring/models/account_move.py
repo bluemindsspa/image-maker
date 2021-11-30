@@ -185,7 +185,7 @@ class AccountMove(models.Model):
         )
         if not response:
             return None
-        print(response)
+        
         response_parsed = etree.fromstring(response)
         self.l10n_cl_sii_cesion_send_ident = response_parsed.findtext('TRACKID')
         sii_response_status = response_parsed.findtext('STATUS')
