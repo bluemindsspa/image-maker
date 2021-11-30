@@ -37,7 +37,7 @@ class AccountMove(models.Model):
         return True
 
     #@api.constrains("reference", "partner_id", "company_id", "move_type", "journal_document_class_id")
-    @api.constrains("reference", "partner_id", "company_id", "move_type", "l10n_latam_document_type_id")
+    @api.constrains("ref", "partner_id", "company_id", "move_type", "l10n_latam_document_type_id")
     def _check_reference_in_invoice(self):
         for record in self:
             #if record.move_type in ["in_invoice", "in_refund"] and record.sii_document_number:
