@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="action_eightcolumns_report" model="ir.actions.client">
+    <record id="action_feetickets_report" model="ir.actions.client">
         <field name="name">Boleta de Honorarios</field>
         <field name="tag">account_report</field>
         <field name="context" eval="{'model': 'account.feetickets.report.cl'}"/>
@@ -9,5 +9,5 @@
     <menuitem id="menu_action_feetickets_report"
         name="Boleta de Honorarios"
         parent="l10n_cl.account_reports_cl_statements_menu"
-        action="action_eightcolumns_report"/>
+        action="action_feetickets_report"/>
 </odoo>
