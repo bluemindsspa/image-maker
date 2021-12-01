@@ -14,9 +14,9 @@
                     <field name="bank_opt" widget="radio"/>
                 </group>
                 <footer>
-                    <button name="import_file" string="Import" type="object"/>
+                    <button name="import_file" string="Import" type="object" class="btn-primary"/>
                     or
-                    <button name="cancel" string="Cancel" class="oe_link"/>
+                    <button name="cancel" string="Cancel" class="btn-danger" special="cancel"/>
                 </footer>
             </form>
         </field>
