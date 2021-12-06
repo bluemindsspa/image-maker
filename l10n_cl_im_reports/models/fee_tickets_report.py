@@ -17,7 +17,7 @@ class FeeTicketsReport(models.AbstractModel):
     filter_multi_company = None
 
     def _get_report_name(self):
-        return _("Boleta de Honorarios")
+        return _("Libro de Honorarios")
 
     def _prepare_header_data(self, options):
         company = self.env.company
@@ -96,6 +96,7 @@ class FeeTicketsReport(models.AbstractModel):
             percent = ret_percent[0] if ret_percent else 0.00
             ret = move_id.amount_by_group[0][1]
             line['ret'] = ret
+            invoice_line = move_id.invoice_line_ids
             # percent = move_id.invoice_line_ids[0].tax_ids[0].amount
             correl += 1
             lines.append({
@@ -111,7 +112,7 @@ class FeeTicketsReport(models.AbstractModel):
                         line['nro'],
                         line['partner_vat'],
                         line['partner_name'],
-                        line['glosa'],
+                        invoice_line[0].name,
                         self.format_value(line['bruto']),
                         percent,
                         ret,

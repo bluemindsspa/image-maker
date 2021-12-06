@@ -9,7 +9,7 @@
     'contributors': ["Boris Silva <silvaboris@gmail.com>"],
     'description': """
         Accounting reports for Chile
-        Boleta de Honorarios
+        Libro de Honorarios
     """,
     'depends': [
         'account', 'account_reports',
