@@ -115,7 +115,7 @@ class FeeTicketsReport(models.AbstractModel):
                         invoice_line[0].name,
                         self.format_value(line['bruto']),
                         percent,
-                        ret,
+                        self.format_value(ret),
                         self.format_value(line['total'])
                     ]
                 ],
