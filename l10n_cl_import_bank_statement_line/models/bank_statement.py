@@ -92,36 +92,15 @@ class account_bank_statement_wizard(models.TransientModel):
                     contador += 1
                     for col in range(sheet.ncols):
                         header[values_header[col]] = sheet.cell_value(row_no, col)
-                    # line = list(
-                    #     map(lambda row: isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value),
-                    #         sheet.row(row_no)))
-                    # logging.info(line[0])
-                    # logging.info(type(line[0]))
-                    # try:
-                    #     fecha = line[3].decode("utf-8")
-                    #     date_string = datetime.strptime(fecha, '%d/%m/%Y').strftime('%Y-%m-%d')
-                    #     print(date_string)
-                    #     values.update({'date': date_string,
-                    #                    'ref': '',
-                    #                    'partner': line[7],
-                    #                    'memo': line[1].decode("utf-8"),
-                    #                    'amount': float(line[0]),
-                    #                    })
-                    #     #res = self._create_statement_lines(values)
-                    #     bank_statement.write([0, 0, values])
-                    # except Exception as e:
-                    #     _logger.warning(str(e))
                     if header['MONTO'] == 'Resumen comisiones':
                         break
                     if header['MONTO'] == 'Saldos diarios':
                          break
-
                     values['statement_id'] = active_id
                     values['amount'] = header['MONTO']
                     values['date'] = datetime.strptime(
                         header['FECHA'], '%d/%m/%Y').strftime('%Y-%m-%d')
                     values['payment_ref'] = header['DESCRIPCIÓN MOVIMIENTO']
-                    # vals['amount'] = values_es['MONTO']
                     values['narration'] = header['CARGO/ABONO']
 
                     bank_statement.write({'line_ids': [(0, 0, values)]})
@@ -133,68 +112,32 @@ class account_bank_statement_wizard(models.TransientModel):
                     contador += 1
                     for col in range(sheet.ncols):
                         header[values_header[col]] = sheet.cell_value(row_no, col)
-                    # line = list(
-                    #     map(lambda row: isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value),
-                    #         sheet.row(row_no)))
-                    # logging.info(line[0])
-                    # logging.info(type(line[0]))
-                    # try:
-                    #     fecha = line[3].decode("utf-8")
-                    #     date_string = datetime.strptime(fecha, '%d/%m/%Y').strftime('%Y-%m-%d')
-                    #     print(date_string)
-                    #     values.update({'date': date_string,
-                    #                    'ref': '',
-                    #                    'partner': line[7],
-                    #                    'memo': line[1].decode("utf-8"),
-                    #                    'amount': float(line[0]),
-                    #                    })
-                    #     #res = self._create_statement_lines(values)
-                    #     bank_statement.write([0, 0, values])
-                    # except Exception as e:
-                    #     _logger.warning(str(e))
                     if header['Fecha'] == 'Saldo (CLP)':
                         break
-                    
-
                     values['statement_id'] = active_id
-                    #values['amount'] = header['Cargos (CLP)'] or header['Abonos (CLP)']
-                    amount = header['Abonos (CLP)'] or (header['Cargos (CLP)'] * (-1))
-                    #values['amount'] = header['Abonos (CLP)']
+                    amount = header['Abonos (CLP)'] or header['Cargos (CLP)']
                     values['amount'] = amount
                     values['date'] = datetime.strptime(
                         header['Fecha'], '%d/%m/%Y').strftime('%Y-%m-%d')
                     values['payment_ref'] = header['Descripción']
-                    # vals['amount'] = values_es['MONTO']
-                    #values['narration'] = header['CARGO/ABONO']
-                    
-
                     bank_statement.write({'line_ids': [(0, 0, values)]})
-
             elif self.bank_opt == 'security':
-                contador = 12
+                contador = 14
                 header = {}
-                values_header = [sheet.cell_value(11, i) for i in range(sheet.ncols)]
-                for row_no in range(12, sheet.nrows):
+                values_header = [sheet.cell_value(13, i) for i in range(sheet.ncols)]
+                for row_no in range(14, sheet.nrows):
                     contador += 1
                     for col in range(sheet.ncols):
                         header[values_header[col]] = sheet.cell_value(row_no, col)
-                    
-                    if header['Fecha '] == 'Saldos':
+                    if not(header['fecha ']):
                         break
-                    
-
                     values['statement_id'] = active_id
-                    values['amount'] = header['Cargos'] or header['Abonos']
-                    #values['amount'] = header['Abonos (CLP)']
-                    values['date'] = datetime.strptime(
-                        header['Fecha'], '%d-%m-%Y').strftime('%Y-%m-%d')
-                    values['payment_ref'] = header['Descripción']
-                    # vals['amount'] = values_es['MONTO']
-                    #values['narration'] = header['CARGO/ABONO']
-                    print('AQUI ANDOOOO', header['Fecha'])
-
+                    excel_date = header['fecha ']
+                    convert_date = datetime(*xlrd.xldate_as_tuple(excel_date, 0))
+                    values['date'] = convert_date.strftime('%Y-%m-%d')
+                    values['amount'] = header['cargos '] or header['abonos ']
+                    values['payment_ref'] = header['descripción ']
                     bank_statement.write({'line_ids': [(0, 0, values)]})
-
             elif self.bank_opt == 'tdcn':
                 contador = 19
                 header = {}
@@ -206,8 +149,6 @@ class account_bank_statement_wizard(models.TransientModel):
                     
                     if not header['Fecha']:
                         break
-                    
-
                     values['statement_id'] = active_id
                     values['amount'] = header['Montos'] * (-1)
                     #values['amount'] = header['Abonos (CLP)']
@@ -247,8 +188,6 @@ class account_bank_statement_wizard(models.TransientModel):
                     #     _logger.warning(str(e))
                     if not header['Fecha']:
                         break
-                    
-
                     values['statement_id'] = active_id
                     values['amount'] = header['Monto'] * (-1)
                     #values['amount'] = header['Abonos (CLP)']
@@ -257,29 +196,26 @@ class account_bank_statement_wizard(models.TransientModel):
                     values['payment_ref'] = header['Descripción']
                     # vals['amount'] = values_es['MONTO']
                     #values['narration'] = header['CARGO/ABONO']
-
                     bank_statement.write({'line_ids': [(0, 0, values)]})
             elif self.bank_opt == 'bice':
-                contador = 12
+                contador = 10
                 header = {}
-                values_header = [sheet.cell_value(11, i) for i in range(sheet.ncols)]
-                for row_no in range(12, sheet.nrows):
+                years_format = str(years)
+                values_header = [sheet.cell_value(9, i) for i in range(sheet.ncols)]
+                for row_no in range(10, sheet.nrows):
                     contador += 1
                     for col in range(sheet.ncols):
                         header[values_header[col]] = sheet.cell_value(row_no, col)
-                    
-                    if not header['FECHA']:
-                        break
-                    
-
+                    if not header['Fecha']:
+                        break                    
                     values['statement_id'] = active_id
-                    values['amount'] = header['CARGOS'] or header['ABONOS']
-                    values['date'] = datetime.strptime(
-                        header['FECHA'], '%Y%m%d').strftime('%Y-%m-%d')
-                    values['payment_ref'] = header['DESCRIPCION']
-                    # vals['amount'] = values_es['MONTO']
-                    #values['narration'] = header['CARGO/ABONO']
-
+                    if header['Fecha'] == '  -  ':
+                        header['Fecha'] = ''
+                    else:
+                        a = datetime.strptime(header['Fecha'] + '-' + years_format, '%d-%m-%Y').strftime('%Y-%m-%d')
+                        values['date'] = a
+                    values['payment_ref'] = header['Descripción']
+                    values['amount'] = header['Cargos'] if header['Cargos'] else header['Abonos']
                     bank_statement.write({'line_ids': [(0, 0, values)]})
             elif self.bank_opt == 'bci':
                 contador = 2
@@ -289,65 +225,42 @@ class account_bank_statement_wizard(models.TransientModel):
                     contador += 1
                     for col in range(sheet.ncols):
                         header[values_header[col]] = sheet.cell_value(row_no, col)
-                    
                     if not header['Fecha']:
                         break
-                    
-                    amount = header['Abono $'] or header['Cargo $']
-                    amount = amount.replace('.', '') if '.' in amount else amount
+                    abono = header['Abono $']
+                    cargo = header['Cargo $']
+                    cargo_format = cargo.replace('.','') if '.' in cargo else cargo
+                    abono_format = abono.replace('.','') if '.' in abono else abono
+                    values['amount'] = float(cargo_format) * -1 if float(cargo_format) != 0 else abono_format
                     values['statement_id'] = active_id
-                    values['amount'] = amount
                     values['date'] = datetime.strptime(
-                        header['Fecha'], '%d-%m-%Y').strftime('%Y-%m-%d')
+                        header['Fecha'], '%d/%m/%Y').strftime('%Y-%m-%d')
                     values['payment_ref'] = header['Descripción']
-                    # vals['amount'] = values_es['MONTO']
-                    #values['narration'] = header['CARGO/ABONO']
-                    print('AQUI ANDOOOOOOOOOOOOOOOOOOOOOOO', header['Cargo $'])
-
                     bank_statement.write({'line_ids': [(0, 0, values)]})
             elif self.bank_opt == 'estado':
-                contador = 34
+                contador = 17
                 header = {}
-                values_header = [sheet.cell_value(33, i) for i in range(sheet.ncols)]
-                for row_no in range(34, sheet.nrows):
+                values_header = [sheet.cell_value(16, i) for i in range(sheet.ncols)]
+                for row_no in range(17, sheet.nrows):
                     contador += 1
                     for col in range(sheet.ncols):
                         header[values_header[col]] = sheet.cell_value(row_no, col)
-                    # line = list(
-                    #     map(lambda row: isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value),
-                    #         sheet.row(row_no)))
-                    # logging.info(line[0])
-                    # logging.info(type(line[0]))
-                    # try:
-                    #     fecha = line[3].decode("utf-8")
-                    #     date_string = datetime.strptime(fecha, '%d/%m/%Y').strftime('%Y-%m-%d')
-                    #     print(date_string)
-                    #     values.update({'date': date_string,
-                    #                    'ref': '',
-                    #                    'partner': line[7],
-                    #                    'memo': line[1].decode("utf-8"),
-                    #                    'amount': float(line[0]),
-                    #                    })
-                    #     #res = self._create_statement_lines(values)
-                    #     bank_statement.write([0, 0, values])
-                    # except Exception as e:
-                    #     _logger.warning(str(e))
+                    if header['Fecha'] == 'Resumen:':
+                        break
                     if header['Fecha']:
-                        try:
-                            fecha = datetime.strptime(header['Fecha'], '%d/%m/%Y').strftime('%Y-%m-%d')
-                        except:
-                            break
-
-                    amount = header['Abonos'] or (header['Cargos'] * (-1))
-                    values['statement_id'] = active_id
-                    values['amount'] = amount
-                    values['date'] = fecha
-                    values['payment_ref'] = header['Descripción']
-                    # vals['amount'] = values_es['MONTO']
-                    #values['narration'] = header['CARGO/ABONO']
-                    
-
-                    bank_statement.write({'line_ids': [(0, 0, values)]})
+                        date_format = header['Fecha'][0:10]
+                        values['date'] = datetime.strptime(date_format, '%d-%m-%Y').strftime('%Y-%m-%d')
+                    if header['Cheques/'] == 'Cargos $':
+                        header['Cheques/'] = ''
+                    if header['Depósitos/'] == 'Abonos $':
+                        header['Depósitos/'] = ''
+                    if header['Depósitos/'] and header['Depósitos/'] != '':
+                        values['amount'] = header['Depósitos/']
+                    if header['Cheques/'] and header['Cheques/'] != '':
+                        values['amount'] = header['Cheques/']
+                    if header['Descripción']:
+                        values['payment_ref'] = header['Descripción']
+                        bank_statement.write({'line_ids': [(0, 0, values)]})
             elif self.bank_opt == 'scotiabank':
                 contador = 11
                 header = {}
@@ -356,82 +269,40 @@ class account_bank_statement_wizard(models.TransientModel):
                     contador += 1
                     for col in range(sheet.ncols):
                         header[values_header[col]] = sheet.cell_value(row_no, col)
-                    # line = list(
-                    #     map(lambda row: isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value),
-                    #         sheet.row(row_no)))
-                    # logging.info(line[0])
-                    # logging.info(type(line[0]))
-                    # try:
-                    #     fecha = line[3].decode("utf-8")
-                    #     date_string = datetime.strptime(fecha, '%d/%m/%Y').strftime('%Y-%m-%d')
-                    #     print(date_string)
-                    #     values.update({'date': date_string,
-                    #                    'ref': '',
-                    #                    'partner': line[7],
-                    #                    'memo': line[1].decode("utf-8"),
-                    #                    'amount': float(line[0]),
-                    #                    })
-                    #     #res = self._create_statement_lines(values)
-                    #     bank_statement.write([0, 0, values])
-                    # except Exception as e:
-                    #     _logger.warning(str(e))
                     if not header['Fecha']:
                         break
-                    
-
                     values['statement_id'] = active_id
-                    values['amount'] = header['Cargos'] or header['Abonos']
+                    if header['Cargo']:
+                        values['amount'] = header['Cargo'] * -1
+                    else:
+                        values['amount'] = header['Abono'] 
                     values['date'] = datetime.strptime(
                         header['Fecha'], '%d-%m-%Y').strftime('%Y-%m-%d')
                     values['payment_ref'] = header['Descripción']
-                    # vals['amount'] = values_es['MONTO']
-                    #values['narration'] = header['CARGO/ABONO']
-                    
-
                     bank_statement.write({'line_ids': [(0, 0, values)]})
             else:
                 # ITAU Este es el fin y se recorre invertido
-                for row_no in range(sheet.nrows):
-
-                    if row_no <= 26:
-                        fields = map(lambda row: row.value.encode('utf-8'), sheet.row(row_no))
-                    else:
-                        line = list(
-                            map(lambda row: isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value),
-                                sheet.row(row_no)))
-                        # data = line[].decode("utf-8"
-
-                        if line[0] != '':
-                            fecha = line[0].decode("utf-8")
-                            fecha = fecha + '/' + str(years)
-
-                            try:
-                                date_string = datetime.strptime(fecha, '%d/%m/%Y').strftime('%Y-%m-%d')
-                                if line[3] != 0 and line[3] != '':
-                                    monto = int(line[3].replace('.0', ''))
-
-                                    values.update({'date': date_string,
-                                                   'ref': line[2].decode("utf-8"),
-                                                   'partner': 'X',
-                                                   'memo': line[2].decode("utf-8"),
-                                                   'amount': monto * (-1),
-                                                   })
-                                if line[3] == 0 and line[3] != '':
-                                    values.update({'date': date_string,
-                                                   'ref': line[2].decode("utf-8"),
-                                                   'partner': 'X',
-                                                   'memo': line[2].decode("utf-8"),
-                                                   'amount': int(line[4].replace('.0', '')),
-                                                   })
-                                res = self._create_statement_lines(values)
-                            except:
-                                break
-
-
-
-
-
-
+                contador = 26
+                header = {}
+                years_format = str(years)
+                values_header = [sheet.cell_value(25, i) for i in range(sheet.ncols)]
+                for row_no in range(26, sheet.nrows):
+                    contador += 1
+                    for col in range(sheet.ncols):
+                        header[values_header[col]] = sheet.cell_value(row_no, col)
+                    if header['Fecha'] == 'Resumen de Saldos':
+                        break
+                    values['statement_id'] = active_id
+                    if header['Fecha']:
+                        fecha_fomat = header['Fecha'] + '/' + years_format
+                        values['date'] = datetime.strptime(fecha_fomat, '%d/%m/%Y').strftime('%Y-%m-%d')
+                    abonos = header['Depósitos'] = '' if header['Depósitos'] == 'o abonos' else header['Depósitos']
+                    cargos = header['Giros'] = '' if header['Giros'] == 'o cargos' else header['Giros']
+                    if cargos != '' or abonos != '':
+                        values['amount'] = abonos if abonos else cargos
+                    if header['Descripción'] != '':
+                        values['payment_ref'] = header['Descripción']
+                        bank_statement.write({'line_ids': [(0, 0, values)]})
         else:
             raise Warning('Please Select File Type')
         self.env['account.bank.statement'].browse(self._context.get('active_id'))._end_balance()
