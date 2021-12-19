@@ -208,8 +208,10 @@ class L10nClEdiUtilMixin(models.AbstractModel):
 
     @l10n_cl_edi_retry(logger=_logger)
     def _get_send_status_ws_cesion(self, mode, company_vat, track_id, token, docType, folio):
-        #transport = Transport(operation_timeout=TIMEOUT)
-        return Client(SERVER_URL[mode] + 'services/wsRPETCConsulta?wsdl').service.getEstCesion(token, company_vat[:-2], company_vat[-1], track_id, docType, folio)
+        transport = Transport(operation_timeout=TIMEOUT)
+        #return Client(SERVER_URL[mode] + 'services/wsRPETCConsulta?wsdl', transport=transport).service.getEstCesion(company_vat[:-2], company_vat[-1], track_id, token)
+        serv =Client(SERVER_URL[mode] + 'services/wsRPETCConsulta?wsdl', transport=transport).service
+        return serv.getEstEnvio(token, track_id)
 
     def _get_send_status_cesion(self, mode, track_id, company_vat, digital_signature, docType, folio):
         """
