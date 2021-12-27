@@ -1,0 +1,69 @@
+/*Estilos primer table informations_invoice*/
+
+.informations_invoice{
+
+	border: solid 2px black;
+	border-radius: 50px;
+	margin-bottom: 10px;
+}
+
+/*Segundo table date_pay*/
+
+.date_pay{
+
+	border: solid 2px black;
+	border-radius: 50px;
+	margin-bottom: 10px;
+}
+
+.th{
+
+	/*border: solid 2px black;*/
+	border-right: solid 2px black;
+	border-bottom: solid 2px black;
+	padding:2px !important;
+	background: rgb(242, 241, 241);
+}
+
+.td{
+
+	/*border: solid 2px black;*/
+	border-right: solid 2px black;
+	padding:2px !important;
+}
+
+.td_color{
+
+	background: rgb(242, 241, 241);
+	width: 60px;
+	padding:2px !important;
+}
+
+/*Tercer table invoice_line_table*/
+
+.invoice_line_table{
+	border: solid 2px black;
+	border-radius: 50px;
+	margin-bottom: 10px;
+}
+
+.td_lines{
+
+	border-right: solid 2px black;
+	padding:4px !important;
+}
+
+/*Cuarto table totales*/
+
+.totales{
+
+	border: solid 2px black;
+	border-radius: 50px;
+	margin-bottom: 20px;
+}
+
+.td_totales{
+
+	background: rgb(242, 241, 241);
+	padding:2px !important;
+}
