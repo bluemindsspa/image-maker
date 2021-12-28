@@ -1,172 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>	
 <odoo>
 	<data>
-		<template id="external_layout_standard" inherit_id="web.external_layout_standard">
-			<xpath expr="//div[@t-att-style='report_header_style']" position="replace">
+		<template id="custom_header" inherit_id="l10n_cl.custom_header">
+			<xpath expr="//t[@t-set='report_number']" position="replace">
+				<t t-set="report_number" t-value="o.name"/>
 			</xpath>
 		</template>
-		<template id="report_invoice_document" inherit_id="account.report_invoice_document">
-			<xpath expr="//t[@t-set='address']" position="replace"/>
-			<xpath expr="//div/div[@id='informations']" position="replace"/>
-			<xpath expr="//div/h2/span[@t-field='o.name']" position="replace"/>
-			<xpath expr="//div/h2/span[1]" position="replace"/>
-			<xpath expr="//div/table[@name='invoice_line_table']" position="before">
-				<t t-set="report_date" t-value="o.invoice_date"/>
-        		<t t-set="report_number" t-value="o.name"/>
-        		<t t-set="pre_printed_report" t-value="report_type == 'pdf'"/>
-        		<t t-set="report_name" t-value="o.l10n_latam_document_type_id.name"/>
-        		<t t-set="header_address" t-value="o.company_id.partner_id"/>
-        		<t t-set="custom_footer">
-        		    <t t-call="l10n_cl.custom_footer"/>
-        		</t>
-				<div class="header row">
-					<div name="left-upper-side" class="col-8 text-center">
-	                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
-	                         style="max-height: 45px;" alt="Logo"/>
-	                    <br/>
-	                    <strong>
-	                        <span t-field="o.company_id.partner_id.name"/>
-	                    </strong>
-	                    <br/>
-	                    <span name="company_activity" class="font-italic" t-field="o.company_id.report_header"/>
-	                    <div/>
-	                    <t t-esc="' - '.join([item for item in [
-	                        ', '.join([item for item in [header_address.street, header_address.street2] if item]),
-	                        header_address.city,
-	                        header_address.state_id and header_address.state_id.name,
-	                        header_address.zip,
-	                        header_address.country_id and header_address.country_id.name] if item])"/>
-	                    <span t-if="header_address.phone">
-	                        <br/>
-	                    </span>
-	                    <span t-if="header_address.phone" style="white-space: nowrap;"
-	                          t-esc="'Tel: ' + header_address.phone"/>
-	                    <span t-if="header_address.website">
-	                        <span t-att-style="'color: %s;' % o.company_id.primary_color"
-	                              t-esc="'- Web: %s' %' - '.join([item for item in [header_address.website.replace('https://', '').replace('http://', ''), header_address.email] if item])"/>
-	                    </span>
-                	</div>
-	                <div name="right-upper-side" class="col-4">
-	                    <div class="row">
-	                        <div name="right-upper-side" class="col-12">
-	                            <div class="row border border-dark">
-	                                <div class="col-12 text-center">
-	                                    <h6 t-att-style="'color: %s;' % o.company_id.primary_color">
-	                                        <strong t-att-style="'color: %s;' % o.company_id.primary_color">
-	                                            <br/>
-	                                            <span style="line-height: 180%;">RUT:</span>
-	                                            <span t-esc="o.company_id.partner_id.vat"/>
-	                                            <br/>
-	                                            <span class="text-uppercase" t-esc="report_name"/>
-	                                            <br/>
-	                                            <span>Nº :</span>
-	                                            <span style="line-height: 200%;" t-esc="report_number"/>
-	                                        </strong>
-	                                    </h6>
-	                                </div>
-	                            </div>
-	                            <div class="row text-center">
-	                                <div class="col-12 text-center" t-att-style="'color: %s;' % o.company_id.primary_color"
-	                                     name="regional-office"/>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
+		<template id="report_invoice_informations" inherit_id="l10n_cl.informations">
+			<xpath expr="//div[@id='informations']" position="replace">
+				<div id="informations">
+					<table name="informations_invoice" class="table informations_invoice">
+						<tr>
+							<td class="td_color">
+								<strong>Señor(es): </strong>
+							</td>
+							<td>
+								<span t-field="o.partner_id.name"/>
+							</td>
+							<td class="td_color">
+								<strong>RUT: </strong>
+							</td>
+							<td>
+								<span t-field="o.partner_id.vat"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="td_color">
+								<strong>Giro: </strong>
+							</td>
+							<td>
+								<span t-field="o.partner_id.l10n_cl_activity_description"/>
+							</td>
+							<td class="td_color">
+								<strong>Fecha Emisión</strong>
+							</td>
+							<td>
+								<span t-field="o.invoice_date"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="td_color">
+								<strong>Dirección: </strong>
+							</td>
+							<td>
+								<span t-field="o.partner_id.street"/>
+							</td>
+							<td class="td_color">
+								<strong>Comuna: </strong>
+							</td>
+							<td>
+								<span t-field="o.partner_id.city"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="td_color">
+								<strong>Contacto: </strong>
+							</td>
+							<td>
+								<t t-foreach="o.partner_id.child_ids" t-as="contac">
+									<span t-field="contac.name"/>,  
+								</t>
+							</td>
+							<td class="td_color">
+								<strong>Vendedor: </strong>
+							</td>
+							<td>
+								<span t-field="o.partner_id.user_id.name"/>
+							</td>
+						</tr>
+					</table>
+					<table name="date_pay" class="table date_pay">
+						<tr>
+							<th class="text-center th" colspan="4">
+								<strong>Datos del pago: </strong>
+							</th>
+						</tr>
+						<tr>
+							<td class="td_color">
+								<strong>Forma: </strong>
+							</td>
+							<td class="td">
+								<span t-field="o.invoice_payment_term_id.name"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="td_color">
+								<strong>Terminos: </strong>
+							</td>
+							<td class="td">
+								<span t-field="o.invoice_date_due"/>
+							</td>
+						</tr>
+					</table>
 				</div>
-				<table name="informations_invoice" class="table informations_invoice">
-					<tr>
-						<td class="td_color">
-							<strong>Señor(es): </strong>
-						</td>
-						<td>
-							<span t-field="o.partner_id.name"/>
-						</td>
-						<td class="td_color">
-							<strong>RUT: </strong>
-						</td>
-						<td>
-							<span t-field="o.partner_id.vat"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="td_color">
-							<strong>Giro: </strong>
-						</td>
-						<td>
-							<span t-field="o.partner_id.l10n_cl_activity_description"/>
-						</td>
-						<td class="td_color">
-							<strong>Fecha Emisión</strong>
-						</td>
-						<td>
-							<span t-field="o.invoice_date"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="td_color">
-							<strong>Dirección: </strong>
-						</td>
-						<td>
-							<span t-field="o.partner_id.street"/>
-						</td>
-						<td class="td_color">
-							<strong>Comuna: </strong>
-						</td>
-						<td>
-							<span t-field="o.partner_id.city"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="td_color">
-							<strong>Contacto: </strong>
-						</td>
-						<td>
-							<t t-foreach="o.partner_id.child_ids" t-as="contac">
-								<span t-field="contac.name"/>,  
-							</t>
-						</td>
-						<td class="td_color">
-							<strong>Vendedor: </strong>
-						</td>
-						<td>
-							<span t-field="o.partner_id.user_id.name"/>
-						</td>
-					</tr>
-				</table>
-				<table name="date_pay" class="table date_pay">
-					<tr>
-						<th class="text-center th" colspan="4">
-							<strong>Datos del pago: </strong>
-						</th>
-					</tr>
-					<tr>
-						<td class="td_color">
-							<strong>Forma: </strong>
-						</td>
-						<td class="td">
-							<span t-field="o.invoice_payment_term_id.name"/>
-						</td>
-					</tr>
-					<!-- <tr>
-						<td class="td_color">
-							<strong>Medio: </strong>
-						</td>
-						<td class="td">
-							<span>h</span>
-						</td>
-					</tr> -->
-					<tr>
-						<td class="td_color">
-							<strong>Terminos: </strong>
-						</td>
-						<td class="td">
-							<span t-field="o.invoice_date_due"/>
-						</td>
-					</tr>
-				</table>
 			</xpath>
-			<xpath expr="//div/table[@name='invoice_line_table']" position="replace">
-				<table name="invoice_line_table" class="table invoice_line_table">
+		</template>
+
+		<template id="report_invoice_document" inherit_id="account.report_invoice_document" primary="True">
+			<t t-set="o" position="after">
+            	<t t-set="custom_header" t-value="'report_IM.custom_header'"/>
+        	</t>
+
+        	<t t-set="address" position="replace"/>
+
+        	<xpath expr="//h2" position="replace"/>
+        	
+        	<div id="informations" position="replace">
+        		<t t-call="report_IM.report_invoice_informations"/>
+        	</div>
+        	<xpath expr="//div/table[@name='invoice_line_table']" position="replace">
+        		<table name="invoice_line_table" class="table invoice_line_table">
 					<tr>
 						<th class="text-center th" colspan="6">
 							<strong>Detalles</strong>
@@ -190,8 +133,8 @@
 						</tr>
 					</t>
 				</table>
-			</xpath>
-			<xpath expr="//div/div[hasclass('clearfix')]" position="replace">
+        	</xpath>
+        	<xpath expr="//div/div[hasclass('clearfix')]" position="replace">
 				<div class="clearfix">
 					<div id="total" class="row">
 						<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
@@ -259,6 +202,21 @@
 			</xpath>
 			<xpath expr="//div/p[@name='payment_communication']" position="replace"/>
 			<xpath expr="//div/p[@name='payment_term']" position="replace"/>
+		</template>
+
+
+		<template id="report_IM_document" inherit_id="account.report_invoice" primary="True">
+			<xpath expr='//t[@t-call="account.report_invoice_document"]' position="after">
+				<t t-if="o._get_name_invoice_report() == 'report_IM.report_invoice_document'"
+                	t-call="report_IM.report_invoice_document" t-lang="lang"/>
+			</xpath>
+		</template>
+
+		<template id="report_IM_document_with_payments" inherit_id="account.report_invoice_with_payments">
+			<xpath expr='//t[@t-call="account.report_invoice_document"]' position="after">
+				<t t-if="o._get_name_invoice_report() == 'report_IM.report_invoice_document'"
+                	t-call="report_IM.report_invoice_document" t-lang="lang"/>
+			</xpath>
 		</template>
 	</data>
 </odoo>

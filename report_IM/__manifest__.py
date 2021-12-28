@@ -9,6 +9,8 @@
     'depends': [
         'base',
         'account',
+        'l10n_cl',
+        'l10n_cl_edi',
     ],
     'data': [
         'views/assets.xml',
