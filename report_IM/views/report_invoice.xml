@@ -200,6 +200,31 @@
 					</div>
 				</div>
 			</xpath>
+
+			<xpath expr="//div[@id='total']" position="after">
+	            <div class="row">
+	                <div name="stamp" class="col-4 text-center"/>
+	                <div name="transferable-table" class="col-4"/>
+	                <div name="transferable-legend" class="col-4 pull-right"/>
+	            </div>
+        	</xpath>
+
+        	<xpath expr="//div[@name='stamp']" position="inside">
+	        	<t t-if="o.l10n_cl_sii_barcode">
+					<t t-set="barcode_stamp" t-value="o._pdf417_barcode(o.l10n_cl_sii_barcode)"/>
+					<t t-if="barcode_stamp">
+						<img class="img-fluid" t-attf-src="data:image/*;base64,{{barcode_stamp}}"/>
+						<p style="color:black;" class="text-center small size">
+							Timbre Electrónico SII<br />
+							Resolución Nº: <span t-field="o.company_id.l10n_cl_dte_resolution_number"/>
+							de Fecha: <span t-field="o.company_id.l10n_cl_dte_resolution_date" t-field-options='{"widget": "date"}'/>
+							<br/>
+							<span name="verification_url">Verifique documento en www.sii.cl</span>
+						</p>
+					</t>
+				</t>
+        	</xpath>
+        	
 			<xpath expr="//div/p[@name='payment_communication']" position="replace"/>
 			<xpath expr="//div/p[@name='payment_term']" position="replace"/>
 		</template>
