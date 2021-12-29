@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    	<template id="export_informations" inherit_id="report_IM.report_invoice_informations">
+    		
+			<xpath expr="//div/table[@name='informations_invoice']/tr[4]" position="after">
+				<t t-if="exportacion">
+					<tr>
+						<td class="td_color">
+							<strong>Fecha de Vencimiento: </strong>
+						</td>
+						<td>
+							<span t-field="o.invoice_date_due"/> 
+						</td>
+						<td class="td_color">
+							<strong>Pais destino: </strong>
+						</td>
+						<td class="td_new">
+							<span t-field="o.partner_id.country_id.name"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="td_color">
+							<strong>Moneda: </strong>
+						</td>
+						<td class="td_new" colspan="4">
+							<span t-field="o.currency_id.name"/>
+						</td>
+					</tr>
+				</t>
+			</xpath>
+			<xpath expr="//div/table[@name='date_pay']" position="replace">
+				<t t-if="exportacion">
+					
+				</t>
+				<t t-else="">
+					<table name="date_pay" class="table date_pay">
+						<tr>
+							<th class="text-center th" colspan="4">
+								<strong>Datos del pago: </strong>
+							</th>
+						</tr>
+						<tr>
+							<td class="td_color">
+								<strong>Forma: </strong>
+							</td>
+							<td class="td">
+								<span t-field="o.invoice_payment_term_id.name"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="td_color">
+								<strong>Terminos: </strong>
+							</td>
+							<td class="td">
+								<span t-field="o.invoice_date_due"/>
+							</td>
+						</tr>
+					</table>
+				</t>
+			</xpath>
+    	</template>
+         <template id="report_invoice_export" inherit_id="account.report_invoice_document" primary="True">
+         	<t t-set="o" position="after">
+            	<t t-set="custom_header" t-value="'report_IM.custom_header'"/>
+        	</t>
+
+        	<t t-set="address" position="replace"/>
+
+        	<xpath expr="//h2" position="replace"/>
+
+         	<xpath expr="//div[@id='informations']" position="replace">
+         		<div id="informations" position="replace">
+        			<t t-call="report_IM_exportacion.export_informations"/>
+        		</div>
+         	</xpath>
+
+         	<xpath expr="//div/table[@name='invoice_line_table']" position="replace">
+        		<table name="invoice_line_table" class="table invoice_line_table">
+					<tr>
+						<th class="text-center th" colspan="6">
+							<strong>Detalles</strong>
+						</th>
+					</tr>
+					<tr>
+						<th name="th_description" class="text-left th"><span>Descripción</span></th>
+						<th name="th_quantity" class="text-right th"><span>Cantidad</span></th>
+						<th name="th_unid" class="text-center th"><span>Unid</span></th>
+						<th name="th_priceunit" t-attf-class="text-right th {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Precio Unitario</span></th>
+						<th name="th_total" class="text-right th"><span>Total</span></th>
+					</tr>
+					
+					<t t-foreach="o.invoice_line_ids" t-as="line">
+						<tr>
+							<td name="account_invoice_line_name" class="text-left td_lines"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+							<td name="td_quantity" class="text-right td_lines"><span t-field="line.quantity"/></td>
+							<td name="td_unid" class="text-center td_lines"><span t-field="line.product_uom_id"/></td>
+							<td name="td_priceunit" class="text-right td_lines"><span t-field="line.price_unit"/></td>
+							<td name="td_total" class="text-right td_lines"><span t-field="line.price_subtotal"/></td>	
+						</tr>
+					</t>
+				</table>
+        	</xpath>
+
+        	<xpath expr="//div/div[hasclass('clearfix')]" position="replace">
+				<div class="clearfix">
+					<div id="total" class="row">
+						<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+							<table class="table table-sm totales">
+								<tr class="o_subtotal">
+                                    <td class="td_totales"><strong>Subtotal:</strong></td>
+                                    <td class="text-right">
+                                        <span t-field="o.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                    <tr style="">
+                                        <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
+                                            <td class="td_totales"><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
+                                            <td class="text-right o_price_total">
+                                                <span class="text-nowrap" t-esc="amount_by_group[3]" />
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td class="td_totales">
+                                                <span t-esc="amount_by_group[0]"/>
+                                                <span class="text-nowrap"> on
+                                                    <t t-esc="amount_by_group[4]"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-right o_price_total">
+                                                <span class="text-nowrap" t-esc="amount_by_group[3]"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <tr class="o_total">
+                                    <td class="td_totales"><strong>Total:</strong></td>
+                                    <td class="text-right">
+                                        <span class="text-nowrap" t-field="o.amount_total"/>
+                                    </td>
+                                </tr>
+                                <t t-if="print_with_payments">
+                                    <t t-if="o.payment_state != 'invoicing_legacy'">
+                                        <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                                        <t t-foreach="payments_vals" t-as="payment_vals">
+                                            <tr>
+                                                <td class="td_totales">
+                                                    <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']" t-options='{"widget": "date"}'/></i>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="len(payments_vals) > 0">
+                                            <tr>
+                                                <td class="td_totales"><strong>Amount Due</strong></td>
+                                                <td class="text-right">
+                                                    <span t-field="o.amount_residual"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+							</table>
+						</div>
+					</div>
+				</div>
+			</xpath>
+
+			<xpath expr="//div[@id='total']" position="after">
+	            <div class="row">
+	                <div name="stamp" class="col-4 text-center"/>
+	                <div name="transferable-table" class="col-4"/>
+	                <div name="transferable-legend" class="col-4 pull-right"/>
+	            </div>
+        	</xpath>
+
+        	<xpath expr="//div[@name='stamp']" position="inside">
+	        	<t t-if="o.l10n_cl_sii_barcode">
+					<t t-set="barcode_stamp" t-value="o._pdf417_barcode(o.l10n_cl_sii_barcode)"/>
+					<t t-if="barcode_stamp">
+						<img class="img-fluid" t-attf-src="data:image/*;base64,{{barcode_stamp}}"/>
+						<p style="color:black;" class="text-center small size">
+							Timbre Electrónico SII<br />
+							Resolución Nº: <span t-field="o.company_id.l10n_cl_dte_resolution_number"/>
+							de Fecha: <span t-field="o.company_id.l10n_cl_dte_resolution_date" t-field-options='{"widget": "date"}'/>
+							<br/>
+							<span name="verification_url">Verifique documento en www.sii.cl</span>
+						</p>
+					</t>
+				</t>
+        	</xpath>
+
+        	<xpath expr="//div/p[@name='payment_communication']" position="replace"/>
+			<xpath expr="//div/p[@name='payment_term']" position="replace"/>
+        </template>
+    </data>
+</odoo>

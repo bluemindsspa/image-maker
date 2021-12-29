@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <template id="report_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="report_IM_exportacion.report_invoice_export">
+                        <t t-set="exportacion" t-value="True" />
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_export_invoice" model="ir.actions.report">
+            <field name="name">Factura exportacion</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">report_IM_exportacion.report_invoice</field>
+            <field name="report_file">report_IM_exportacion.report_invoice</field>
+            <field name="attachment">(object.state in ('open','paid')) and ('FyC_'+(object.number or '').replace('/','')+'.pdf')</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>
