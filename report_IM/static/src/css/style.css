@@ -32,6 +32,13 @@
 	padding:2px !important;
 }
 
+.td_new{
+
+	/*border: solid 2px black;*/
+	border-right: solid 2px black;
+	/*padding:2px !important;*/
+}
+
 .td_color{
 
 	background: rgb(242, 241, 241);

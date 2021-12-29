@@ -20,7 +20,7 @@
 							<td class="td_color">
 								<strong>RUT: </strong>
 							</td>
-							<td>
+							<td class="td_new">
 								<span t-field="o.partner_id.vat"/>
 							</td>
 						</tr>
@@ -34,7 +34,7 @@
 							<td class="td_color">
 								<strong>Fecha Emisión</strong>
 							</td>
-							<td>
+							<td class="td_new">
 								<span t-field="o.invoice_date"/>
 							</td>
 						</tr>
@@ -48,7 +48,7 @@
 							<td class="td_color">
 								<strong>Comuna: </strong>
 							</td>
-							<td>
+							<td class="td_new">
 								<span t-field="o.partner_id.city"/>
 							</td>
 						</tr>
@@ -64,7 +64,7 @@
 							<td class="td_color">
 								<strong>Vendedor: </strong>
 							</td>
-							<td>
+							<td class="td_new">
 								<span t-field="o.partner_id.user_id.name"/>
 							</td>
 						</tr>
