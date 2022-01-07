@@ -324,3 +324,6 @@ class AccountBookReport(models.TransientModel):
             'target': "self",
             'no_destroy': False,
         }
+
+    def print_report(self):
+        return self.env.ref('book_account.account_book_sale_action').report_action(self)

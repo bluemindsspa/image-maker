@@ -22,8 +22,9 @@
                         <field name="invoice_ids" invisible="1"/>
                     </sheet>
                      <footer>
-                        <button name="export_report_xls" string="Generar Excel" type="object" class="btn btn-primary"/>
-                        <button string="Cancel" class="btn btn-default" special="cancel" />
+                         <button name="export_report_xls" string="Generar Excel" type="object" class="btn btn-primary"/>
+                         <button name="print_report" string="Imprimir PDF" type="object" class="btn btn-primary"/>
+                         <button string="Cancel" class="btn btn-default" special="cancel" />
                     </footer>
                 </form>
             </field>
