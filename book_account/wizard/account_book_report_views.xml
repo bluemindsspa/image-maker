@@ -41,6 +41,6 @@
         <!-- This Menu Item Must have a parent -->
         <menuitem id="menu_categ_move_books_form" name="Libros Cierre de Mes" parent="account.menu_finance_reports"/>
 
-        <menuitem id="menu_action_move_books_form" name="Libros Compra y Venta Excel" parent="menu_categ_move_books_form" action="action_account_book_report"/>
+        <menuitem id="menu_action_move_books_form" name="Libros Compra y Venta" parent="menu_categ_move_books_form" action="action_account_book_report"/>
     </data>
 </odoo>
