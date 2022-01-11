@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+		<template id="report_move_copia_cedible" inherit_id="report_IM.report_invoice_document">
+			<xpath expr="//div[@name='stamp']" position="after">
+				<t t-if="cedible">
+					<div class="col-10 right">
+						<span class="margen">Recinto: </span> <span> _________________________________________________________________</span>
+						<br/>
+						<span class="margen">Nombre: </span> <span> _________________________________________________________________</span>
+						<br/>
+						<span>___________________________________________________________________________</span>
+						<br/>
+						<span>Fecha: </span> <span> ______/_______/_________</span>
+						<br/>
+						<span>RUT: </span> <span>___________________________</span> <span class="mg_right">______________________________</span>
+						<br/>
+						<span class="mg_right1">Firma </span>
+						<br/>
+						<span class="text-justificado">El acuse de recibo que se declara en este acto, de acuerdo a lo dispuesto en la letra b) del
+						Art. 4°, y la letra c) del Art. 5° de la Ley 19.983, acredita que la entrega de mercaderías o
+						servicio(s) prestado(s) ha(n) sido recibido(s)</span>	
+					</div>
+				</t>
+			</xpath>
+		</template>
+	</data>
+</odoo>

@@ -163,8 +163,8 @@
 				</table>
         	</xpath>
         	<xpath expr="//div/div[hasclass('clearfix')]" position="replace">
-        		<div id="total" class="row mgen">
-        			<div class="column">
+        		<div id="total" class="row mgen clearfix">
+        			<div class="column col-9">
         				<t t-if="o.l10n_cl_reference_ids">
 	        				<table name="table_references" class="table letter table_duo">
 	        					<tr>
@@ -191,7 +191,7 @@
 	        				</table>
 	        			</t>
         			</div>
-        			<div class="column">
+        			<div class="column col-3">
         				<table name="table_totales" class="table letter table_duo">
         					<tr>
 								<th class="text-center th_duo th" colspan="2">
@@ -232,75 +232,6 @@
         				</table>
         			</div>
         		</div>
-				<!-- <div class="clearfix">
-					<div id="total" class="row">
-						<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
-							<table class="table table-sm totales">
-								<tr>
-									<th class="text-center th" colspan="4">
-										<strong>Totales</strong>
-									</th>
-								</tr>
-								<tr class="o_subtotal">
-                                    <td class="td_totales"><strong>Subtotal:</strong></td>
-                                    <td class="text-right td">
-                                        <span t-field="o.amount_untaxed"/>
-                                    </td>
-                                </tr>
-                                <t t-foreach="o.amount_by_group" t-as="amount_by_group">
-                                    <tr style="">
-                                        <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
-                                            <td class="td_totales"><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
-                                            <td class="text-right o_price_total td">
-                                                <span class="text-nowrap" t-esc="amount_by_group[3]" />
-                                            </td>
-                                        </t>
-                                        <t t-else="">
-                                            <td class="td_totales">
-                                                <span t-esc="amount_by_group[0]"/>
-                                                <span class="text-nowrap"> on
-                                                    <t t-esc="amount_by_group[4]"/>
-                                                </span>
-                                            </td>
-                                            <td class="text-right o_price_total td">
-                                                <span class="text-nowrap" t-esc="amount_by_group[3]"/>
-                                            </td>
-                                        </t>
-                                    </tr>
-                                </t>
-                                <tr class="o_total">
-                                    <td class="td_totales"><strong>Total:</strong></td>
-                                    <td class="text-right td">
-                                        <span class="text-nowrap" t-field="o.amount_total"/>
-                                    </td>
-                                </tr>
-                                <t t-if="print_with_payments">
-                                    <t t-if="o.payment_state != 'invoicing_legacy'">
-                                        <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
-                                        <t t-foreach="payments_vals" t-as="payment_vals">
-                                            <tr>
-                                                <td class="td_totales">
-                                                    <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']" t-options='{"widget": "date"}'/></i>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                </td>
-                                            </tr>
-                                        </t>
-                                        <t t-if="len(payments_vals) > 0">
-                                            <tr>
-                                                <td class="td_totales"><strong>Amount Due</strong></td>
-                                                <td class="text-right td">
-                                                    <span t-field="o.amount_residual"/>
-                                                </td>
-                                            </tr>
-                                        </t>
-                                    </t>
-                                </t>
-							</table>
-						</div>
-					</div>
-				</div> -->
 			</xpath>
 
 			<xpath expr="//div[@id='total']" position="after">

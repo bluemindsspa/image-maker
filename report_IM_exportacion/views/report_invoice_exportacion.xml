@@ -117,8 +117,8 @@
 				</table>
         	</xpath>
         	<xpath expr="//div/div[hasclass('clearfix')]" position="replace">
-        		<div id="total" class="row mgen">
-        			<div class="column">
+        		<div id="total" class="row mgen clearfix">
+        			<div class="column col-9">
         				<t t-if="o.l10n_cl_reference_ids">
 	        				<table name="table_references" class="table letter table_duo">
 	        					<tr>
@@ -145,7 +145,7 @@
 	        				</table>
 	        			</t>
         			</div>
-        			<div class="column">
+        			<div class="column col-3">
         				<table name="table_totales" class="table letter table_duo">
         					<tr>
 								<th class="text-center th_duo th" colspan="2">

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+		<template id="report_cedible_invoice">
+			<t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="report_cedible_IM.report_move_copia_cedible">
+                        <t t-set="cedible" t-value="True" />
+                    </t>
+                </t>
+            </t>
+		</template>
+
+		<record id="action_print_copy_cedible" model="ir.actions.report">
+			<field name="name">Imprimir Copia y Cedible</field>
+			<field name="model">account.move</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">report_cedible_IM.report_cedible_invoice</field>
+			<field name="report_file">report_cedible_IM.report_cedible_invoice</field>
+			<field name="attachment">(object.state in ('open','paid')) and ('FyC_'+(object.number or '').replace('/','')+'.pdf')</field>
+			<field name="binding_model_id" ref="account.model_account_move"/>
+			<field name="binding_type">report</field>
+		</record>
+	</data>
+</odoo>

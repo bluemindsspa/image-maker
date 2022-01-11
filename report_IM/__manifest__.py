@@ -2,10 +2,12 @@
 
 {
     'name': 'Report invoice',
-    'version': '0.1',
-    'category': '',
-    'summary': '',
-    'description': '',
+    'version': '14.0.0.0.1',
+    'category': 'Localization/Chile',
+    'summary': 'Reporte de Facturación Electrónica para Chile.',
+    'author': 'Blueminds',
+    'contributors': 'Gabriela Paredes <isabelgpb21@gmail.com>',
+    'website': 'https://blueminds.cl',
     'depends': [
         'base',
         'account',
