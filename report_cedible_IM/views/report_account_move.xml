@@ -4,16 +4,16 @@
 		<template id="report_move_copia_cedible" inherit_id="report_IM.report_invoice_document">
 			<xpath expr="//div[@name='stamp']" position="after">
 				<t t-if="cedible">
-					<div class="col-10 right">
-						<span class="margen">Recinto: </span> <span> _________________________________________________________________</span>
+					<div class="col-10 right letra_size">
+						<span class="margen">Recinto: </span> <span> __________________________________________________________________________</span>
 						<br/>
-						<span class="margen">Nombre: </span> <span> _________________________________________________________________</span>
+						<span class="margen">Nombre: </span> <span> __________________________________________________________________________</span>
 						<br/>
-						<span>___________________________________________________________________________</span>
+						<span>_____________________________________________________________________________________</span>
 						<br/>
-						<span>Fecha: </span> <span> ______/_______/_________</span>
+						<span>Fecha: </span> <span> ________/_________/___________</span>
 						<br/>
-						<span>RUT: </span> <span>___________________________</span> <span class="mg_right">______________________________</span>
+						<span>RUT: </span> <span>______________________________</span> <span class="mg_right">______________________________</span>
 						<br/>
 						<span class="mg_right1">Firma </span>
 						<br/>
