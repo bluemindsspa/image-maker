@@ -5,6 +5,12 @@
 	border: solid 2px black;
 	border-radius: 50px;
 	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
+.espacio{
+
+	padding: 4px !important;	
 }
 
 /*Segundo table date_pay*/
@@ -23,6 +29,7 @@
 	border-bottom: solid 2px black;
 	padding:2px !important;
 	background: rgb(242, 241, 241);
+	border-top: solid 2px black;
 }
 
 .td{
@@ -36,6 +43,7 @@
 
 	/*border: solid 2px black;*/
 	border-right: solid 2px black;
+	/*padding: 2px !important;*/
 	/*padding:2px !important;*/
 }
 
@@ -43,7 +51,7 @@
 
 	background: rgb(242, 241, 241);
 	width: 60px;
-	padding:2px !important;
+	/*padding:2px !important;*/
 }
 
 /*Tercer table invoice_line_table*/
@@ -67,10 +75,69 @@
 	border: solid 2px black;
 	border-radius: 50px;
 	margin-bottom: 20px;
+
 }
 
 .td_totales{
 
 	background: rgb(242, 241, 241);
 	padding:2px !important;
+}
+
+
+/*Cambiar el color del borde*/
+
+.color_borde{
+
+	border: 2px solid red;
+}
+
+/*Tabla de referencia y totales*/
+
+.mgen{
+
+	margin-left:-5px;
+	margin-right:-5px;
+}
+
+.letter{
+
+	font-size: 14px;
+}
+
+.column{
+
+	/*float: left;*/
+  	width: 50%;
+  	padding: 5px;
+}
+
+.table_duo {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 2px solid black;
+}
+
+.th_duo{
+
+	text-align: left;
+  	padding:2px !important;
+  	border-top: 1px solid black;
+
+} 
+
+.td_duo {
+  text-align: left;
+  padding:2px !important;
+  
+}
+
+.th_encabezado{
+
+	background: rgb(242, 241, 241);
+	border-top: 2px solid black;
+	/*border-right: 1px solid black;*/
+	border-bottom: 2px solid black;
+
 }

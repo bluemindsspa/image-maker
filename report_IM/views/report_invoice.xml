@@ -2,74 +2,102 @@
 <odoo>
 	<data>
 		<template id="custom_header" inherit_id="l10n_cl.custom_header">
-			<xpath expr="//t[@t-set='report_number']" position="replace">
-				<t t-set="report_number" t-value="o.name"/>
+			<xpath expr="//div/div/div[@name='left-upper-side']" position="replace">
+				<div name="left-upper-side" class="col-8 text-center">
+					<img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                         style="max-height: 50px;" alt="Logo"/>
+                    <br/>
+                    <strong>
+                        <span t-field="o.company_id.partner_id.name"/>
+                    </strong>
+                    <br/>
+                    <span name="company_activity" class="font-italic" t-field="o.company_id.report_header"/>
+                    <span t-field="o.company_id.l10n_cl_activity_description"/>
+                    <br/>
+                    <span t-field="o.company_id.street"/> - <span t-field="o.company_id.city"/> - <span t-field="o.company_id.state_id.name"/> 
+                    <br/>
+                    <span>TELÉFONO: </span> <span t-field="o.company_id.phone"/>
+                    <br/>
+                    <span>E-MAIL: </span> <span t-field="o.company_id.email"/>
+                    <br/>
+				</div>
+			</xpath>
+			<xpath expr="//div/div/div[@name='right-upper-side']/div/div/div" position="attributes">
+				<attribute name="class">color_borde</attribute>
 			</xpath>
 		</template>
 		<template id="report_invoice_informations" inherit_id="l10n_cl.informations">
 			<xpath expr="//div[@id='informations']" position="replace">
 				<div id="informations">
-					<table name="informations_invoice" class="table informations_invoice">
+					<table name="informations_invoice" class="table informations_invoice letter">
 						<tr>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>Señor(es): </strong>
 							</td>
-							<td>
+							<td class="espacio">
 								<span t-field="o.partner_id.name"/>
 							</td>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>RUT: </strong>
 							</td>
-							<td class="td_new">
+							<td class="td_new espacio">
 								<span t-field="o.partner_id.vat"/>
 							</td>
 						</tr>
 						<tr>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>Giro: </strong>
 							</td>
-							<td>
+							<td class="espacio">
 								<span t-field="o.partner_id.l10n_cl_activity_description"/>
 							</td>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>Fecha Emisión</strong>
 							</td>
-							<td class="td_new">
+							<td class="td_new espacio">
 								<span t-field="o.invoice_date"/>
 							</td>
 						</tr>
 						<tr>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>Dirección: </strong>
 							</td>
-							<td>
+							<td class="espacio">
 								<span t-field="o.partner_id.street"/>
 							</td>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>Comuna: </strong>
 							</td>
-							<td class="td_new">
+							<td class="td_new espacio">
 								<span t-field="o.partner_id.city"/>
 							</td>
 						</tr>
 						<tr>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>Contacto: </strong>
 							</td>
-							<td>
+							<td class="espacio">
 								<t t-foreach="o.partner_id.child_ids" t-as="contac">
 									<span t-field="contac.name"/>,  
 								</t>
 							</td>
-							<td class="td_color">
+							<td class="td_color espacio">
 								<strong>Vendedor: </strong>
 							</td>
-							<td class="td_new">
+							<td class="td_new espacio">
 								<span t-field="o.partner_id.user_id.name"/>
 							</td>
 						</tr>
+						<tr>
+							<td class="td_color espacio">
+								<strong>Tasa UF: </strong>
+							</td>
+							<td class="td_new espacio" colspan="4">
+								<span t-field="o.uf_rate"/>
+							</td>
+						</tr>
 					</table>
-					<table name="date_pay" class="table date_pay">
+					<table name="date_pay" class="table date_pay letter">
 						<tr>
 							<th class="text-center th" colspan="4">
 								<strong>Datos del pago: </strong>
@@ -109,7 +137,7 @@
         		<t t-call="report_IM.report_invoice_informations"/>
         	</div>
         	<xpath expr="//div/table[@name='invoice_line_table']" position="replace">
-        		<table name="invoice_line_table" class="table invoice_line_table">
+        		<table name="invoice_line_table" class="table invoice_line_table letter">
 					<tr>
 						<th class="text-center th" colspan="6">
 							<strong>Detalles</strong>
@@ -135,13 +163,87 @@
 				</table>
         	</xpath>
         	<xpath expr="//div/div[hasclass('clearfix')]" position="replace">
-				<div class="clearfix">
+        		<div id="total" class="row mgen">
+        			<div class="column">
+        				<t t-if="o.l10n_cl_reference_ids">
+	        				<table name="table_references" class="table letter table_duo">
+	        					<tr>
+	        						<th class="text-center th_duo th_encabezado" colspan="5">
+	        							<strong>Referencias</strong>
+	        						</th>
+	        					</tr>
+	        					<tr>
+	        						<th name="th_reference_origin" class="text-center th_duo th_encabezado"><span>Ref Orígenes</span></th>
+	        						<th name="th_reference_doc_type" class="text-left th_duo th_encabezado"><span>Tipo de Doc. Ref </span></th>
+	        						<th name="th_reference_code" class="text-center th_duo th_encabezado"><span>Cód. Doc</span></th>
+	        						<th name="th_reference_reason" class="text-left th_duo th_encabezado"><span>Razón</span></th>
+	        						<th name="th_reference_date" class="text-left th_duo th_encabezado"><span>Fecha</span></th>
+	        					</tr>
+	        					<t t-foreach="o.l10n_cl_reference_ids" t-as="refs">
+	        						<tr>
+	        							<td name="td_reference_origin" class="td_duo"><span t-field="refs.origin_doc_number"/></td>
+	        							<td name="td_reference_doc_type" class="td_duo"><span t-field="refs.l10n_cl_reference_doc_type_selection"/></td>
+	        							<td name="td_reference_code" class="td_duo"><span t-field="refs.reference_doc_code"/></td>
+	        							<td name="td_reference_reason" class="td_duo"><span t-field="refs.reason"/></td>
+	        							<td name="td_reference_date" class="td_duo"><span t-field="refs.date"/></td>
+	        						</tr>
+	        					</t>
+	        				</table>
+	        			</t>
+        			</div>
+        			<div class="column">
+        				<table name="table_totales" class="table letter table_duo">
+        					<tr>
+								<th class="text-center th_duo th" colspan="2">
+									<strong>Totales</strong>
+								</th>
+							</tr>
+        					<tr>
+        						<td class="td_totales td_duo"><strong>Subtotal:</strong></td>
+        						<td class="td_duo text-right td"><span t-field="o.amount_untaxed"/></td>
+        					</tr>
+        					<t t-foreach="o.amount_by_group" t-as="amount_by_group">
+        						<tr>
+        							<t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
+        								<td class="td_totales">
+        									<span class="text-nowrap" t-esc="amount_by_group[0]"/>
+        								</td>
+        								<td class="text-right o_price_total td">
+        									<span class="text-nowrap" t-esc="amount_by_group[3]" />
+        								</td>
+        							</t>
+        							<t t-else="">
+        								<td class="td_totales">
+        									<span t-esc="amount_by_group[0]"/>
+        									<span class="text-nowrap"> on
+        										<t t-esc="amount_by_group[4]"/>
+        									</span>
+        								</td>
+        								<td class="text-right o_price_total td">
+        									<span class="text-nowrap" t-esc="amount_by_group[3]"/>
+        								</td>
+        							</t>
+        						</tr>
+        					</t>
+        					<tr>
+        						<td class="td_totales td_duo"><strong>Total:</strong></td>
+        						<td class="text-right td td_duo"><span class="text-nowrap" t-field="o.amount_total"/></td>
+        					</tr>
+        				</table>
+        			</div>
+        		</div>
+				<!-- <div class="clearfix">
 					<div id="total" class="row">
 						<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
 							<table class="table table-sm totales">
+								<tr>
+									<th class="text-center th" colspan="4">
+										<strong>Totales</strong>
+									</th>
+								</tr>
 								<tr class="o_subtotal">
                                     <td class="td_totales"><strong>Subtotal:</strong></td>
-                                    <td class="text-right">
+                                    <td class="text-right td">
                                         <span t-field="o.amount_untaxed"/>
                                     </td>
                                 </tr>
@@ -149,7 +251,7 @@
                                     <tr style="">
                                         <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
                                             <td class="td_totales"><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
-                                            <td class="text-right o_price_total">
+                                            <td class="text-right o_price_total td">
                                                 <span class="text-nowrap" t-esc="amount_by_group[3]" />
                                             </td>
                                         </t>
@@ -160,7 +262,7 @@
                                                     <t t-esc="amount_by_group[4]"/>
                                                 </span>
                                             </td>
-                                            <td class="text-right o_price_total">
+                                            <td class="text-right o_price_total td">
                                                 <span class="text-nowrap" t-esc="amount_by_group[3]"/>
                                             </td>
                                         </t>
@@ -168,7 +270,7 @@
                                 </t>
                                 <tr class="o_total">
                                     <td class="td_totales"><strong>Total:</strong></td>
-                                    <td class="text-right">
+                                    <td class="text-right td">
                                         <span class="text-nowrap" t-field="o.amount_total"/>
                                     </td>
                                 </tr>
@@ -188,7 +290,7 @@
                                         <t t-if="len(payments_vals) > 0">
                                             <tr>
                                                 <td class="td_totales"><strong>Amount Due</strong></td>
-                                                <td class="text-right">
+                                                <td class="text-right td">
                                                     <span t-field="o.amount_residual"/>
                                                 </td>
                                             </tr>
@@ -198,7 +300,7 @@
 							</table>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</xpath>
 
 			<xpath expr="//div[@id='total']" position="after">
@@ -227,6 +329,11 @@
         	
 			<xpath expr="//div/p[@name='payment_communication']" position="replace"/>
 			<xpath expr="//div/p[@name='payment_term']" position="replace"/>
+		</template>
+
+		<template id="informations1" inherit_id="l10n_cl_edi.informations">
+			<xpath expr="//table[@name='invoice_references']" position="replace">
+			</xpath>
 		</template>
 
 
