@@ -153,7 +153,7 @@
                                                    <t t-set="amount_general" t-value="amount_general + total['amount']"/>
                                                    <t t-set="exempt_general" t-value="exempt_general + total['exempt']"/>
                                                    <t t-set="tax_general" t-value="tax_general + invoice.amount_tax"/>
-                                                   <t t-set="total_general" t-value="total_general + abs(doc.amount_total_signed)"/>
+                                                   <t t-set="total_general" t-value="total_general + abs(invoice.amount_total_signed)"/>
                                                </t>
                                                <td><span t-esc="document.name"/></td>
                                                <td class="text-right"><span t-esc="len(invoices)"/></td>
