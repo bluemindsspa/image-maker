@@ -80,6 +80,9 @@
                                                <td class="text-right"><span t-esc="total['amount_12']" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                                                <td class="text-right"><span t-esc="invoice.amount_total_signed" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                                            </t>
+                                           <t t-else="">
+                                               <td class="text-right"><span t-esc="abs(invoice.amount_total_signed)" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                                           </t>
                                            <t t-set="amount_detail" t-value="amount_detail + total['amount']"/>
                                            <t t-set="exempt_detail" t-value="exempt_detail + total['exempt']"/>
                                            <t t-set="tax_detail" t-value="tax_detail + total['iva']"/>
@@ -88,15 +91,15 @@
                                        </tr>
                                        <tr>
                                            <td colspan="5" class="text-right">Total General</td>
-                                           <td class="text-right"><span t-esc="amount_detail"/></td>
-                                           <td class="text-right"><span t-esc="exempt_detail"/></td>
-                                           <td class="text-right"><span t-esc="tax_detail"/></td>
+                                           <td class="text-right"><span t-esc="'%.2f' % abs(amount_detail)"/></td>
+                                           <td class="text-right"><span t-esc="'%.2f' % abs(exempt_detail)"/></td>
+                                           <td class="text-right"><span t-esc="'%.2f' % abs(tax_detail)"/></td>
                                            <t t-if="docs.type_operation == 'sell'">
-                                               <td class="text-right"><span t-esc="total_12_detail"/></td>
-                                               <td class="text-right"><span t-esc="total_detail"/></td>
+                                               <td class="text-right"><span t-esc="'%.2f' % abs(total_12_detail)"/></td>
+                                               <td class="text-right"><span t-esc="'%.2f' % abs(total_detail)"/></td>
                                            </t>
                                            <t t-else="">
-                                               <td class="text-right"><span t-esc="total_detail"/></td>
+                                               <td class="text-right"><span t-esc="'%.2f' % abs(total_detail)"/></td>
                                            </t>
 
                                        </tr>
@@ -214,14 +217,14 @@
                                                        <t t-set="exempt_general" t-value="exempt_general - total['exempt']"/>
                                                        <t t-set="tax_general" t-value="tax_general - invoice.amount_tax"/>
                                                        <t t-set="total_12_general" t-value="total_12_general - total['amount_12']"/>
-                                                       <t t-set="total_general" t-value="total_general - abs(doc.amount_total_signed)"/>
+                                                       <t t-set="total_general" t-value="total_general - abs(invoice.amount_total_signed)"/>
                                                    </t>
                                                    <t t-else="">
                                                        <t t-set="amount_general" t-value="amount_general + total['amount']"/>
                                                        <t t-set="exempt_general" t-value="exempt_general + total['exempt']"/>
                                                        <t t-set="tax_general" t-value="tax_general + invoice.amount_tax"/>
                                                        <t t-set="total_12_general" t-value="total_12_general + total['amount_12']"/>
-                                                       <t t-set="total_general" t-value="total_general + abs(doc.amount_total_signed)"/>
+                                                       <t t-set="total_general" t-value="total_general + abs(invoice.amount_total_signed)"/>
                                                    </t>
                                                </t>
                                                <td><span t-esc="document.name"/></td>
