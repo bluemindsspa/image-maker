@@ -31,10 +31,17 @@ class AccountBookReport(models.TransientModel):
         next_month = current + relativedelta(months=1)
         lines = []
         if self.type_operation in ['sell', 'ticket']:
-            query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('out_invoice', 'out_refund') and state = 'posted' and company_id = %s ORDER BY id ASC;" % (current, next_month, self.company_id.id)
+            # query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('out_invoice', 'out_refund') and state = 'posted' and company_id = %s ORDER BY id ASC;" % (current, next_month, self.company_id.id)
+            query = "SELECT a.id, t.code FROM account_move a " \
+                    "INNER JOIN l10n_latam_document_type t ON t.id = a.l10n_latam_document_type_id " \
+                    "WHERE a.date >= '%s' and a.date < '%s' and a.move_type in ('out_invoice', 'out_refund') and a.state = 'posted' and a.company_id = %s " \
+                    "ORDER BY t.code ASC;" % (current, next_month, self.company_id.id)
         else:
-            query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('in_invoice', 'in_refund') and state = 'posted' and company_id = %s ORDER BY id ASC;" % (
-            current, next_month, self.company_id.id)
+            # query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('in_invoice', 'in_refund') and state = 'posted' and company_id = %s ORDER BY id ASC;" % (current, next_month, self.company_id.id)
+            query = "SELECT a.id, t.code FROM account_move a " \
+                    "INNER JOIN l10n_latam_document_type t ON t.id = a.l10n_latam_document_type_id " \
+                    "WHERE a.date >= '%s' and a.date < '%s' and a.move_type in ('in_invoice', 'in_refund') and a.state = 'posted' and a.company_id = %s " \
+                    "ORDER BY t.code ASC;" % (current, next_month, self.company_id.id)
         cr.execute(query)
         for row in cr.dictfetchall():
             lines.append(row['id'])
@@ -209,7 +216,7 @@ class AccountBookReport(models.TransientModel):
                 moves.append(inv)
         else:
             invoices = self.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '39','56', '61', '110', '112'] and s.journal_id.type == 'sale') if self.type_operation == 'sell' \
-            else self.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '56', '61', '71'] and s.journal_id.type == 'purchase') if self.type_operation == 'buy' \
+            else self.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '56', '61'] and s.journal_id.type == 'purchase') if self.type_operation == 'buy' \
             else self.invoice_ids.filtered(lambda s: s.journal_id.type == 'purchase')
             document_class = invoices.mapped("l10n_latam_document_type_id")
             for inv in invoices:
@@ -324,3 +331,6 @@ class AccountBookReport(models.TransientModel):
             'target': "self",
             'no_destroy': False,
         }
+
+    def print_report(self):
+        return self.env.ref('book_account.account_book_sale_action').report_action(self)

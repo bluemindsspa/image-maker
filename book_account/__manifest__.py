@@ -8,10 +8,11 @@
     'author': 'Blueminds',
     'contribuitors': 'Frank Quatromani <fquatromani@blueminds.cl>',
     'website': '',
-    'depends' : ['account'],
-    'data' : [
+    'depends': ['account', 'web'],
+    'data': [
         "security/ir.model.access.csv",
         "wizard/account_book_report_views.xml",
+        "report/account_book_sale.xml"
     ],
     'installable': True,
     'certificate': '',
