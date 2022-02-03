@@ -31,13 +31,13 @@ class AccountBookReport(models.TransientModel):
         next_month = current + relativedelta(months=1)
         lines = []
         if self.type_operation in ['sell', 'ticket']:
-            # query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('out_invoice', 'out_refund') and state = 'posted' and company_id = %s ORDER BY id ASC;" % (current, next_month, self.company_id.id)
+            # query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('out_invoice', 'out_refund') and state = 'posted' and company_id = %s ORDER BY type_operation ASC;" % (current, next_month, self.company_id.id)
             query = "SELECT a.id, t.code FROM account_move a " \
                     "INNER JOIN l10n_latam_document_type t ON t.id = a.l10n_latam_document_type_id " \
                     "WHERE a.date >= '%s' and a.date < '%s' and a.move_type in ('out_invoice', 'out_refund') and a.state = 'posted' and a.company_id = %s " \
                     "ORDER BY t.code ASC;" % (current, next_month, self.company_id.id)
         else:
-            # query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('in_invoice', 'in_refund') and state = 'posted' and company_id = %s ORDER BY id ASC;" % (current, next_month, self.company_id.id)
+            # query = "SELECT id FROM account_move WHERE date >= '%s' and date < '%s' and move_type in ('in_invoice', 'in_refund') and state = 'posted' and company_id = %s ORDER BY type_operation ASC;" % (current, next_month, self.company_id.id)
             query = "SELECT a.id, t.code FROM account_move a " \
                     "INNER JOIN l10n_latam_document_type t ON t.id = a.l10n_latam_document_type_id " \
                     "WHERE a.date >= '%s' and a.date < '%s' and a.move_type in ('in_invoice', 'in_refund') and a.state = 'posted' and a.company_id = %s " \

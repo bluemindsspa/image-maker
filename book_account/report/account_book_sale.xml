@@ -50,16 +50,17 @@
                                    </thead>
                                    <tbody>
                                        <t t-if="o.type_operation == 'ticket'">
-                                           <t t-set="invoices" t-value="o.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['34','39'] and s.journal_id.type == 'sale')"/>
+                                           <t t-set="invoices" t-value="o.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['34','39'] and s.journal_id.type == 'sale').sorted(key=lambda s: s.l10n_latam_document_type_id.code)"/>
                                        </t>
                                        <t t-else="">
                                            <t t-if="o.type_operation == 'sell'">
-                                               <t t-set="invoices" t-value="o.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '39','56', '61', '110', '112'] and s.journal_id.type == 'sale')"/>
+                                               <t t-set="invoices" t-value="o.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '39','56', '61', '110', '112'] and s.journal_id.type == 'sale').sorted(key=lambda s: s.l10n_latam_document_type_id.code)"/>
                                            </t>
                                            <t t-if="o.type_operation == 'buy'">
-                                               <t t-set="invoices" t-value="o.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '56', '61', '71'] and s.journal_id.type == 'purchase')"/>
+                                               <t t-set="invoices" t-value="o.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '56', '61'] and s.journal_id.type == 'purchase').sorted(key=lambda s: s.l10n_latam_document_type_id.code)"/>
                                            </t>
                                        </t>
+<!--                                       <t t-set="invoices" t-value="o.invoice_ids"/>-->
                                        <t t-set="amount_detail" t-value="0"/>
                                        <t t-set="exempt_detail" t-value="0"/>
                                        <t t-set="tax_detail" t-value="0"/>
