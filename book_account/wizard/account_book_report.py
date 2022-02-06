@@ -151,39 +151,68 @@ class AccountBookReport(models.TransientModel):
             document_class = invoices.mapped("l10n_latam_document_type_id")
             for inv in invoices:
                 moves.append(inv)
-        for move in moves:
-            _logger.info('Factura #%s' % move.name)
-            sheet.write(line, 0, move.l10n_latam_document_type_id.name)
-            sheet.write(line, 1, move.l10n_latam_document_number)
-            sheet.write(line, 2, datetime.strftime(move.invoice_date, '%d/%m/%Y'))
-            sheet.write(line, 3, move.partner_id.vat)
-            sheet.write(line, 4, move.partner_id.name)
-            if move.l10n_latam_document_type_id.code in ['110', '112']:
-                totals = self._get_totals_invoices_currency(move.invoice_line_ids)
-            else:
-                totals = self._get_totals_invoices(move.invoice_line_ids)
-            sheet.write(line, 5, totals['amount'])
-            sheet.write(line, 6, totals['exempt'])
-            sheet.write(line, 7, totals['iva'])
+        for doc_class in document_class:
+            total_docs = exempt_docs = amount_docs = tax_docs = total_12_docs = other_imps_docs = 0
+            for move in invoices.filtered(lambda x: x.l10n_latam_document_type_id.id == doc_class.id):
+                _logger.info('Factura #%s' % move.name)
+                sheet.write(line, 0, move.l10n_latam_document_type_id.name)
+                sheet.write(line, 1, move.l10n_latam_document_number)
+                sheet.write(line, 2, datetime.strftime(move.invoice_date, '%d/%m/%Y'))
+                sheet.write(line, 3, move.partner_id.vat)
+                sheet.write(line, 4, move.partner_id.name)
+                if move.l10n_latam_document_type_id.code in ['110', '112']:
+                    totals = self._get_totals_invoices_currency(move.invoice_line_ids)
+                else:
+                    totals = self._get_totals_invoices(move.invoice_line_ids)
+                sheet.write(line, 5, totals['amount'])
+                sheet.write(line, 6, totals['exempt'])
+                sheet.write(line, 7, totals['iva'])
+                if self.type_operation in ['sell', 'fee']:
+                    total_12_details += totals['amount_12']
+                    total_12_docs += totals['amount_12']
+                    sheet.write(line, 8, totals['amount_12'])
+                    sheet.write(line, 9, abs(move.amount_total_signed))
+                else:
+                    sheet.write(line, 8, abs(move.amount_total_signed))
+                ###### Total por documentos #######
+                if move.l10n_latam_document_type_id.code in ['61', '112']:
+                    amount_docs -= totals['amount']
+                    exempt_docs -= totals['exempt']
+                    tax_docs -= move.amount_tax
+                    other_imps_docs -= totals['other_imps']
+                    total_docs -= abs(move.amount_total_signed)
+                else:
+                    amount_docs += totals['amount']
+                    exempt_docs += totals['exempt']
+                    tax_docs += move.amount_tax
+                    other_imps_docs += totals['other_imps']
+                    total_docs += abs(move.amount_total_signed)
+                ###### Total general todos los documentos ######
+                if move.l10n_latam_document_type_id.code in ['61', '112']:
+                    amount_details -= totals['amount']
+                    exempt_details -= totals['exempt']
+                    tax_details -= move.amount_tax
+                    other_imps -= totals['other_imps']
+                    total_details -= abs(move.amount_total_signed)
+                else:
+                    amount_details += totals['amount']
+                    exempt_details += totals['exempt']
+                    tax_details += move.amount_tax
+                    other_imps += totals['other_imps']
+                    total_details += abs(move.amount_total_signed)
+                line += 1
+            ############ TOTAL POR DOCUMENTO ##########
+            sheet.write(line, 0, "Total " + doc_class.name, bold)
+            sheet.write(line, 5, amount_docs, bold)
+            sheet.write(line, 6, exempt_docs, bold)
+            sheet.write(line, 7, tax_docs, bold)
             if self.type_operation in ['sell', 'fee']:
-                total_12_details += totals['amount_12']
-                sheet.write(line, 8, totals['amount_12'])
-                sheet.write(line, 9, abs(move.amount_total_signed))
+                sheet.write(line, 8, total_12_docs, bold)
+                sheet.write(line, 8, total_docs, bold)
             else:
-                sheet.write(line, 8, abs(move.amount_total_signed))
-            if move.l10n_latam_document_type_id.code in ['61', '112']:
-                amount_details -= totals['amount']
-                exempt_details -= totals['exempt']
-                tax_details -= move.amount_tax
-                other_imps -= totals['other_imps']
-                total_details -= abs(move.amount_total_signed)
-            else:
-                amount_details += totals['amount']
-                exempt_details += totals['exempt']
-                tax_details += move.amount_tax
-                other_imps += totals['other_imps']
-                total_details += abs(move.amount_total_signed)
+                sheet.write(line, 8, total_docs, bold)
             line += 1
+        ############ TOTAL GENERAL ##########
         sheet.write(line, 0, "Total General", bold)
         sheet.write(line, 5, amount_details, bold)
         sheet.write(line, 6, exempt_details, bold)
@@ -195,7 +224,7 @@ class AccountBookReport(models.TransientModel):
         else:
             sheet.write(line + 1, 0, 'Total (Afecto + Excento + Iva + Otros Imp)', bold)
             sheet.write(line + 1, 8, amount_details + exempt_details + tax_details + other_imps, bold)
-        ############################### RESUME ############################################
+        ############################### RESUMEN ############################################
         total_documents_general = 0
         amount_global = exempt_global = tax_global = total_12_global = other_imps = 0
         line += 5
