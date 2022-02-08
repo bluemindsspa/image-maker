@@ -12,10 +12,11 @@
         Libro de Honorarios
     """,
     'depends': [
-        'account', 'account_reports',
+        'account', 'account_reports', 'l10n_cl_reports',
     ],
     'data': [
         # 'security/ir.model.access.csv',
         'views/fee_tickets_report_view.xml',
+        'views/report_financial.xml',
     ],
 }
