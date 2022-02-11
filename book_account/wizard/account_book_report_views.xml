@@ -19,7 +19,7 @@
                             <field name="tax_period"/>
                             <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                         </group>
-                        <field name="invoice_ids" invisible="1"/>
+                        <field name="invoice_ids" invisible="0"/>
                     </sheet>
                      <footer>
                          <button name="export_report_xls" string="Generar Excel" type="object" class="btn btn-primary"/>
