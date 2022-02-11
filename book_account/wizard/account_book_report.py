@@ -46,8 +46,6 @@ class AccountBookReport(models.TransientModel):
         for row in cr.dictfetchall():
             lines.append(row['id'])
         self.invoice_ids = [(6, 0, lines)]
-        for inv in self.invoice_ids:
-            inv.name = inv.name[3:]
 
     def report_name(self, name):
         if self.type_operation == 'ticket':

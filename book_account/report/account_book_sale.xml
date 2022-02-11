@@ -83,7 +83,7 @@
                                                    <t t-set="total" t-value="o._get_totals_invoices(invoice.invoice_line_ids)"/>
                                                </t>
                                                <td><span t-field="invoice.l10n_latam_document_type_id.name"/></td>
-                                               <td><span t-field="invoice.name"/></td>
+                                               <td><span t-esc="str(invoice.name)[3:]"/></td>
                                                <td><span t-field="invoice.invoice_date"/></td>
                                                <td><span t-field="invoice.partner_id.vat"/></td>
                                                <td><span t-field="invoice.partner_id.name"/></td>
