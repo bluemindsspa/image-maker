@@ -69,7 +69,7 @@
                             <field name="customer_request_document" widget="boolean_toggle"/>
                             <field name="length_of_service_id" options="{'no_create': True}"/>
                             <field name="archivo" attrs="{'invisible': [('customer_request_document', '=', False)]}"/>
-                            <field name="rol"/>
+                            <field name="rol_id"/>
                             <field name="income_ceiling_id" options="{'no_create': True}"/>
                             <field name="job_functions"/>
                             <field name="years_of_experience"/>
@@ -82,10 +82,10 @@
                             <field name="vacancies"/>
                         </group>
                         <group colspan="2" col="4">
-                            <field name="exclusive_technical_requirements_id" widget="many2many_tags" options="{'no_create': True}"/>
+                            <!-- <field name="exclusive_technical_requirements_id" widget="many2many_tags" options="{'no_create': True}"/> -->
                             <field name="desirable_academic_requirements"/>
                             <!-- <field name="desirable_technical_requirements_id"/> -->
-                            <field name="soft_skills_id" widget="many2many_tags"  options="{'no_create': True}"/>
+                            <!-- <field name="soft_skills_id" widget="many2many_tags"  options="{'no_create': True}"/> -->
                             <field name="languages_id" widget="many2many_tags"  options="{'no_create': True}"/>
                         </group>
                     </page>
