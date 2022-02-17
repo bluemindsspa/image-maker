@@ -53,7 +53,9 @@ class AccountReport(models.AbstractModel):
                 'summary': report_manager.summary,
                 'company_name': self.env.company.name,
                 'company_logo': self.env.company.logo_web,
-                'company_address': company_address
+                'company_address': company_address,
+                'company_rut': self.env.company.vat,
+                'company_glosa': self.env.company.l10n_cl_activity_description
             },
             'options': options,
             'context': self.env.context,

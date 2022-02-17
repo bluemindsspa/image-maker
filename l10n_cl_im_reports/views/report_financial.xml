@@ -5,6 +5,15 @@
             <div class="col-6">
                 <img t-attf-src="data:image/*;base64,{{report.get('company_logo')}}"/>
             </div>
+            <div>
+                <span class="col-6" t-esc="report.get('company_name')"/>
+            </div>
+            <div>
+                <span t-esc="report.get('company_glosa')"/>
+            </div>
+            <div>
+                <span class="col-6">RUT: </span><span t-esc="report.get('company_rut')"/>
+            </div>
             <div class="col-6">
                 <span t-esc="report.get('company_address')[0]"/>
             </div>
@@ -22,6 +31,7 @@
                 <span>Página web: </span><span t-esc="report.get('company_address')[5]"/>
             </div>
         </xpath>
+
         <xpath expr="//div[hasclass('print_only')]" position="attributes">
             <attribute name="class">print_only text-center</attribute>
         </xpath>
