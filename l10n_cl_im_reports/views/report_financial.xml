@@ -9,7 +9,7 @@
                 <span class="col-6" t-esc="report.get('company_name')"/>
             </div>
             <div>
-                <span t-esc="report.get('company_glosa')"/>
+                <span class="col-6" t-esc="report.get('company_glosa')"/>
             </div>
             <div>
                 <span class="col-6">RUT: </span><span t-esc="report.get('company_rut')"/>
