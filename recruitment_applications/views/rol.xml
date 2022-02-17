@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_rol_form" model="ir.ui.view">
+        	<field name="name">rol.form</field>
+        	<field name="model">rol</field>
+        	<field name="arch" type="xml">
+            	<form>
+                    <sheet>
+                	   <group colspan="2" col="4">
+                    	   <field name="name"/>
+                	   </group>
+                    </sheet>
+            	</form>
+        	</field>
+    	</record>
+
+    	<record id="view_rol_tree" model="ir.ui.view">
+        	<field name="name">rol.tree</field>
+        	<field name="model">rol</field>
+        	<field name="arch" type="xml">
+            	<tree editable="top">
+                	<field name="name"/>
+            	</tree>
+        	</field>
+    	</record>
+
+    	<record id="action_rol" model="ir.actions.act_window">
+        	<field name="name">Rol</field>
+        	<field name="res_model">rol</field>
+        	<field name="view_mode">tree,form</field>
+    	</record>
+
+    	<menuitem 
+    		id="menu_rol" 
+    		name="Rol"
+            parent="hr_recruitment.menu_hr_recruitment_configuration" 
+            action="action_rol"/>
+	</data>
+</odoo>
