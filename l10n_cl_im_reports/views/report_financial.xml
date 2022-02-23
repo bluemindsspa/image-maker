@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encque lindaoding="utf-8"?>
 <odoo>
     <template id="im_main_template2" inherit_id="account_reports.main_template">
         <xpath expr="//div[hasclass('print_only')]" position="before">

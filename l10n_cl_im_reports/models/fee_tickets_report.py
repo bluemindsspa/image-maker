@@ -94,7 +94,7 @@ class FeeTicketsReport(models.AbstractModel):
             # ret = move_id.invoice_line_ids[0].tax_ids[0].filtered(lambda line: 'Impuestos' in line.tax_group_id.name)
             ret_percent = [l.amount for l in move_id.invoice_line_ids[0].tax_ids if l.tax_group_id.name == 'Impuestos']
             percent = ret_percent[0] if ret_percent else 0.00
-            ret = move_id.amount_by_group[0][1]
+            ret = move_id.amount_by_group[0][1] if move_id.amount_by_group else 0
             line['ret'] = ret
             invoice_line = move_id.invoice_line_ids
             # percent = move_id.invoice_line_ids[0].tax_ids[0].amount
