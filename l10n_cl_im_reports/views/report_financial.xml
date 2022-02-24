@@ -1,4 +1,4 @@
-<?xml version="1.0" encque lindaoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="im_main_template2" inherit_id="account_reports.main_template">
         <xpath expr="//div[hasclass('print_only')]" position="before">
@@ -35,5 +35,30 @@
         <xpath expr="//div[hasclass('print_only')]" position="attributes">
             <attribute name="class">print_only text-center</attribute>
         </xpath>
+    </template>
+
+    <template id="main_table_header_eightcolumns">
+        <thead class="o_account_reports_header_hierarchy">
+            <tr>
+                <th></th>
+                <th colspan="2" t-att-class="o_account_report_column_header" style="text-align:center;">SUMAS</th>
+                <th colspan="2" t-att-class="o_account_report_column_header" style="text-align:center;">SALDOS</th>
+                <th colspan="2" t-att-class="o_account_report_column_header" style="text-align:center;">INVENTARIOS</th>
+                <th colspan="2" t-att-class="o_account_report_column_header" style="text-align:center;">RESULTADOS</th>
+            </tr>
+            <t t-foreach="lines.get('columns_header')" t-as="header_line">
+                <tr>
+                    <t t-foreach="header_line" t-as="cell">
+                        <th t-att-class="'o_account_report_column_header ' + (cell.get('class', ''))"
+                            t-att-colspan="cell.get('colspan')"
+                            t-att-style="cell.get('style', '')"
+                            t-att-title="cell.get('title')"
+                            t-att-data-toggle="cell.get('data-toggle')">
+                            <t t-call="{{cell.get('template', 'account_reports.cell_template')}}"/>
+                        </th>
+                    </t>
+                </tr>
+            </t>
+        </thead>
     </template>
 </odoo>
