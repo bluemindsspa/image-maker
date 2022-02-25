@@ -11,8 +11,8 @@ class FeeTicketsReport(models.AbstractModel):
 
     # filter_date = {'mode': 'range', 'filter': 'this_year'}
     filter_date = {'mode': 'range', 'filter': 'this_month'}
-    filter_journals = False
-    filter_all_entries = False
+    filter_journals = None
+    filter_all_entries = None
     # filter_analytic = False
     filter_multi_company = None
 
@@ -66,9 +66,11 @@ class FeeTicketsReport(models.AbstractModel):
         FROM account_move move
             LEFT JOIN res_partner partner ON move.partner_id = partner.id
             LEFT JOIN res_partner commercial_partner ON move.commercial_partner_id = commercial_partner.id
+            INNER JOIN account_journal journal ON journal.id = move.journal_id
         WHERE
             move.state = 'posted'
         AND move.move_type = 'in_invoice'
+        AND journal.code = 'BHO'
         AND COALESCE(move.invoice_date) BETWEEN %s AND %s
         """
         # Date range
