@@ -77,6 +77,8 @@ class AccountBookReport(models.TransientModel):
                 exempt += l.price_subtotal
             if l.move_id.l10n_latam_document_type_id.code == '33' and amount < 0:
                 amount = amount * -1
+            if l.move_id.l10n_latam_document_type_id.code == '34':
+                amount = 0
         totals = {
             'amount': amount,
             'exempt': exempt,
@@ -112,6 +114,10 @@ class AccountBookReport(models.TransientModel):
             'amount_12': amount_12
         }
         return totals
+
+    def _format_number(self, number):
+        n = "{:,.0f}".format(float(number)).replace(',','x').replace('.',',').replace('x','.')
+        return n
 
     def export_report_xls(self):
         report_name = self.report_name(self.name)

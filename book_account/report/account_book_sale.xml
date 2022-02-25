@@ -91,11 +91,11 @@
                                                <td class="text-right"><span t-esc="total['exempt']" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                                                <td class="text-right"><span t-esc="total['iva']" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                                                <t t-if="o.type_operation == 'sell'">
-                                                   <td class="text-right"><span t-esc="total['amount_12']" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
-                                                   <td class="text-right"><span t-esc="invoice.amount_total_signed" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                                                   <td class="text-right"><span t-esc="total['amount_12']" t-options='{"widget": "monetary", "display_currency": invoice.company_id.currency_id}'/></td>
+                                                   <td class="text-right"><span t-esc="invoice.amount_total_signed" t-options='{"widget": "monetary", "display_currency": invoice.company_id.currency_id}'/></td>
                                                </t>
                                                <t t-else="">
-                                                   <td class="text-right"><span t-esc="abs(invoice.amount_total_signed)" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                                                   <td class="text-right"><span t-esc="abs(invoice.amount_total_signed)" t-options='{"widget": "monetary", "display_currency": invoice.company_id.currency_id}'/></td>
                                                </t>
                                                <!-- TOTAL POR DOCUMENTO -->
                                                <t t-set="amount_docs" t-value="amount_docs + total['amount']"/>
@@ -112,29 +112,29 @@
                                            </tr>
                                            <tr>
                                                <th colspan="5" class="text-left">Total <t t-esc="doc_type.name"/></th>
-                                               <th class="text-right"><span t-esc="'%.0f' % abs(amount_docs)"/></th>
-                                               <th class="text-right"><span t-esc="'%.0f' % abs(exempt_docs)"/></th>
-                                               <th class="text-right"><span t-esc="'%.0f' % abs(tax_docs)"/></th>
+                                               <th class="text-right"><span t-esc="o._format_number(abs(amount_docs))"/></th>
+                                               <th class="text-right"><span t-esc="o._format_number(abs(exempt_docs))"/></th>
+                                               <th class="text-right"><span t-esc="o._format_number(abs(tax_docs))"/></th>
                                                <t t-if="o.type_operation == 'sell'">
-                                                   <th class="text-right"><span t-esc="'%.0f' % abs(total_12_docs)"/></th>
-                                                   <th class="text-right"><span t-esc="'%.0f' % abs(total_docs)"/></th>
+                                                   <th class="text-right"><span t-esc="o._format_number(abs(total_12_docs))"/></th>
+                                                   <th class="text-right"><span t-esc="o._format_number(abs(total_docs))"/></th>
                                                </t>
                                                <t t-else="">
-                                                   <th class="text-right"><span t-esc="'%.0f' % abs(total_docs)"/></th>
+                                                   <th class="text-right"><span t-esc="o._format_number(abs(total_docs))"/></th>
                                                </t>
                                            </tr>
                                        </t>
                                        <tr>
                                            <th colspan="5" class="text-right">Total General</th>
-                                           <th class="text-right"><span t-esc="'%.0f' % abs(amount_detail)"/></th>
-                                           <th class="text-right"><span t-esc="'%.0f' % abs(exempt_detail)"/></th>
-                                           <th class="text-right"><span t-esc="'%.0f' % abs(tax_detail)"/></th>
+                                           <th class="text-right"><span t-esc="o._format_number(abs(amount_detail))"/></th>
+                                           <th class="text-right"><span t-esc="o._format_number(abs(exempt_detail))"/></th>
+                                           <th class="text-right"><span t-esc="o._format_number(abs(tax_detail))"/></th>
                                            <t t-if="o.type_operation == 'sell'">
-                                               <th class="text-right"><span t-esc="'%.0f' % abs(total_12_detail)"/></th>
-                                               <th class="text-right"><span t-esc="'%.0f' % abs(total_detail)"/></th>
+                                               <th class="text-right"><span t-esc="o._format_number(abs(total_12_detail))"/></th>
+                                               <th class="text-right"><span t-esc="o._format_number(abs(total_detail))"/></th>
                                            </t>
                                            <t t-else="">
-                                               <th class="text-right"><span t-esc="'%.0f' % abs(total_detail)"/></th>
+                                               <th class="text-right"><span t-esc="o._format_number(abs(total_detail))"/></th>
                                            </t>
 
                                        </tr>
@@ -192,10 +192,10 @@
                                                </t>
                                                <td><span t-esc="document.name"/></td>
                                                <td class="text-right"><span t-esc="len(invoices)"/></td>
-                                               <td class="text-right"><span t-esc="amount_general"/></td>
-                                               <td class="text-right"><span t-esc="exempt_general"/></td>
-                                               <td class="text-right"><span t-esc="tax_general"/></td>
-                                               <td class="text-right"><span t-esc="total_general"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(amount_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(exempt_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(tax_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(total_general)"/></td>
                                                <t t-set="quantity_global" t-value="quantity_global + len(invoices)"/>
                                                <t t-set="amount_global" t-value="amount_global + amount_general"/>
                                                <t t-set="exempt_global" t-value="exempt_global + exempt_general"/>
@@ -227,11 +227,11 @@
                                                </t>
                                                <td><span t-esc="document.name"/></td>
                                                <td class="text-right"><span t-esc="len(invoices)"/></td>
-                                               <td class="text-right"><span t-esc="amount_general"/></td>
-                                               <td class="text-right"><span t-esc="exempt_general"/></td>
-                                               <td class="text-right"><span t-esc="tax_general"/></td>
-                                               <td class="text-right"><span t-esc="total_12_general"/></td>
-                                               <td class="text-right"><span t-esc="total_general"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(amount_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(exempt_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(tax_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(total_12_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(total_general)"/></td>
                                                <t t-set="quantity_global" t-value="quantity_global + len(invoices)"/>
                                                <t t-set="amount_global" t-value="amount_global + amount_general"/>
                                                <t t-set="exempt_global" t-value="exempt_global + exempt_general"/>
@@ -264,10 +264,10 @@
                                                </t>
                                                <td><span t-esc="document.name"/></td>
                                                <td class="text-right"><span t-esc="len(invoices)"/></td>
-                                               <td class="text-right"><span t-esc="amount_general"/></td>
-                                               <td class="text-right"><span t-esc="exempt_general"/></td>
-                                               <td class="text-right"><span t-esc="tax_general"/></td>
-                                               <td class="text-right"><span t-esc="total_general"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(amount_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(exempt_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(tax_general)"/></td>
+                                               <td class="text-right"><span t-esc="o._format_number(total_general)"/></td>
                                                <t t-set="quantity_global" t-value="quantity_global + len(invoices)"/>
                                                <t t-set="amount_global" t-value="amount_global + amount_general"/>
                                                <t t-set="exempt_global" t-value="exempt_global + exempt_general"/>
@@ -276,17 +276,17 @@
                                            </t>
                                        </tr>
                                        <tr>
-                                           <td class="text-right">Total General</td>
-                                           <td class="text-right"><span t-esc="'%.0f' % quantity_global"/></td>
-                                           <td class="text-right"><span t-esc="'%.0f' % amount_global"/></td>
-                                           <td class="text-right"><span t-esc="'%.0f' % exempt_global"/></td>
-                                           <td class="text-right"><span t-esc="'%.0f' % tax_global"/></td>
+                                           <th class="text-right">Total General</th>
+                                           <th class="text-right"><span t-esc="o._format_number(quantity_global)"/></th>
+                                           <th class="text-right"><span t-esc="o._format_number(amount_global)"/></th>
+                                           <th class="text-right"><span t-esc="o._format_number(exempt_global)"/></th>
+                                           <th class="text-right"><span t-esc="o._format_number(tax_global)"/></th>
                                            <t t-if="o.type_operation == 'sell'">
-                                               <td class="text-right"><span t-esc="'%.0f' % total_12_global"/></td>
-                                               <td class="text-right"><span t-esc="'%.0f' % total_global"/></td>
+                                               <th class="text-right"><span t-esc="o._format_number(total_12_global)"/></th>
+                                               <th class="text-right"><span t-esc="o._format_number(total_global)"/></th>
                                            </t>
                                            <t t-else="">
-                                               <td class="text-right"><span t-esc="'%.0f' % total_global"/></td>
+                                               <th class="text-right"><span t-esc="o._format_number(total_global)"/></th>
                                            </t>
                                        </tr>
                                    </tbody>
