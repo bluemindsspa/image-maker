@@ -20,7 +20,7 @@
                        <div class="container">
                            <div>
                                <div class="text-center">
-                                   <h2>Libro de <span t-field="o.type_operation"/></h2>
+                                   <h2>Libro de <span t-field="o.type_operation"/>s</h2>
                                </div>
                                 <span>Fecha de emisión: <span t-field="o.date"/></span><br/>
                                 <span>Periodo Tributario: <span t-field="o.tax_period"/></span>
@@ -37,7 +37,7 @@
                                            <th>RUT</th>
                                            <th>Entidad</th>
                                            <th class="text-right">Afecto</th>
-                                           <th class="text-right">Excento</th>
+                                           <th class="text-right">Exento</th>
                                            <th class="text-right">IVA</th>
                                            <t t-if="o.type_operation == 'sell'">
                                                <th class="text-right">ANT 12%IVA</th>
@@ -83,7 +83,7 @@
                                                    <t t-set="total" t-value="o._get_totals_invoices(invoice.invoice_line_ids)"/>
                                                </t>
                                                <td><span t-field="invoice.l10n_latam_document_type_id.name"/></td>
-                                               <td><span t-esc="str(invoice.name)[3:]"/></td>
+                                               <td><span t-esc="o._get_only_digits(invoice.name)"/></td>
                                                <td><span t-field="invoice.invoice_date"/></td>
                                                <td><span t-field="invoice.partner_id.vat"/></td>
                                                <td><span t-field="invoice.partner_id.name"/></td>
