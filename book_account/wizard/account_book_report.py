@@ -66,19 +66,20 @@ class AccountBookReport(models.TransientModel):
                         exempt += l.price_subtotal
                         amount -= exempt
                         if l.move_id.l10n_latam_document_type_id.code == '33':
+                            amount += l.price_subtotal
+                            exempt = 0
                             amount_iva += l.price_subtotal * tax.amount / 100
                     elif tax.l10n_cl_sii_code == 14:
                         amount_iva += l.price_subtotal * tax.amount / 100
-
                     elif tax.l10n_cl_sii_code == 19:
                         amount_12 += l.price_subtotal * tax.amount / 100
                     else:
                         other_imps += l.price_subtotal * tax.amount / 100
             else:
-                exempt += l.price_subtotal
-            if l.move_id.l10n_latam_document_type_id.code == '33':
-                amount = exempt
-                exempt = 0
+                if l.move_id.l10n_latam_document_type_id.code != '33':
+                    exempt += l.price_subtotal
+                else:
+                    amount += l.price_subtotal
             if l.move_id.l10n_latam_document_type_id.code == '34':
                 amount = 0
         totals = {
