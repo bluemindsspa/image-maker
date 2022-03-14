@@ -52,26 +52,27 @@ class FeeTicketsReport(models.AbstractModel):
         query = """
         SELECT
             move.id AS move_id,
-            --'Honorarios' as tipo,
             move.invoice_date AS date,
-            1 as correl,
             move.name as nro,
             partner.vat AS partner_vat,
             COALESCE(partner.name, commercial_partner.name) AS partner_name,
             move.narration as glosa,
             move.amount_untaxed AS bruto,
-            --11.50 AS porcent,
-            --move.amount_tax AS ret,
+            act.amount * -1 AS porcent,
+            move.amount_tax * -1 AS ret,
             move.amount_total AS total
         FROM account_move move
             LEFT JOIN res_partner partner ON move.partner_id = partner.id
             LEFT JOIN res_partner commercial_partner ON move.commercial_partner_id = commercial_partner.id
+            LEFT JOIN account_move_line aml ON move.id = aml.move_id
+            LEFT JOIN account_tax act ON aml.tax_line_id = act.id
             INNER JOIN account_journal journal ON journal.id = move.journal_id
         WHERE
             move.state = 'posted'
         AND move.move_type = 'in_invoice'
         AND journal.code = 'BHO'
         AND COALESCE(move.invoice_date) BETWEEN %s AND %s
+        ORDER by act.amount
         """
         # Date range
         params = [options['date']['date_from'], options['date']['date_to']]
@@ -95,7 +96,7 @@ class FeeTicketsReport(models.AbstractModel):
             move_id = self.env['account.move'].browse(line['move_id'])
             # ret = move_id.invoice_line_ids[0].tax_ids[0].filtered(lambda line: 'Impuestos' in line.tax_group_id.name)
             ret_percent = [l.amount for l in move_id.invoice_line_ids[0].tax_ids if l.tax_group_id.name == 'Impuestos']
-            percent = ret_percent[0] if ret_percent else 0.00
+            percent = ret_percent[0] * -1 if ret_percent else 0.00
             ret = move_id.amount_by_group[0][1] if move_id.amount_by_group else 0
             line['ret'] = ret
             invoice_line = move_id.invoice_line_ids
@@ -116,8 +117,8 @@ class FeeTicketsReport(models.AbstractModel):
                         line['partner_name'],
                         invoice_line[0].name,
                         self.format_value(line['bruto']),
-                        percent,
-                        self.format_value(ret),
+                        line['porcent'] or 0.00,
+                        self.format_value(ret * -1),
                         self.format_value(line['total'])
                     ]
                 ],
@@ -134,7 +135,7 @@ class FeeTicketsReport(models.AbstractModel):
                     {'name': values} for values in [
                         '', '', '', '', '',  '',
                         self.format_value(totals['bruto']),  '',
-                        self.format_value(totals['ret']),
+                        self.format_value(totals['ret'] * -1),
                         self.format_value(totals['total'])
                     ]
                 ],
