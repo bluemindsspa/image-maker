@@ -72,6 +72,7 @@ class FeeTicketsReport(models.AbstractModel):
         AND move.move_type = 'in_invoice'
         AND journal.code = 'BHO'
         AND COALESCE(move.invoice_date) BETWEEN %s AND %s
+        GROUP by act.amount, move.id, move.invoice_date, move.name, partner.vat, partner_name, move.narration, move.amount_untaxed, move.amount_total
         ORDER by act.amount
         """
         # Date range
@@ -104,9 +105,15 @@ class FeeTicketsReport(models.AbstractModel):
             correl += 1
             lines.append({
                 'id': line['move_id'],
-                'name': False,
-                'level': 1,
-                'unfoldable': False,
+                'name': line['nro'],
+                'title_hover': line['nro'],
+                'level': 2,
+                'unfoldable': True,
+                'unfolded': False,
+                # 'colspan': 4,
+                'class': 'o_account_reports_totals_below_sections' if self.env.company.totals_below_sections else '',
+                # 'caret_options': 'account.move.line',
+                # 'parent_id': line['move_id'],
                 'columns': [
                     {'name': values} for values in [
                         # line['tipo'],
@@ -122,7 +129,6 @@ class FeeTicketsReport(models.AbstractModel):
                         self.format_value(line['total'])
                     ]
                 ],
-                'caret_options': False
             })
         if lines:
             totals = self._calculate_totals(results)
