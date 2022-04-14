@@ -76,10 +76,10 @@ class AccountBookReport(models.TransientModel):
                     else:
                         other_imps += l.price_subtotal * tax.amount / 100
             else:
-                if l.move_id.l10n_latam_document_type_id.code != '33':
-                    exempt += l.price_subtotal
-                else:
-                    amount += l.price_subtotal
+                # if l.move_id.l10n_latam_document_type_id.code != '33':
+                #     exempt += l.price_subtotal
+                # else:
+                exempt += l.price_subtotal
             if l.move_id.l10n_latam_document_type_id.code == '34':
                 amount = 0
         totals = {
@@ -172,7 +172,7 @@ class AccountBookReport(models.TransientModel):
         for doc_class in document_class:
             total_docs = exempt_docs = amount_docs = tax_docs = total_12_docs = other_imps_docs = 0
             for move in invoices.filtered(lambda x: x.l10n_latam_document_type_id.id == doc_class.id):
-                _logger.info('Factura #%s' % move.name)
+                _logger.info('%s Factura #%s' % (line, move.name))
                 sheet.write(line, 0, move.l10n_latam_document_type_id.name)
                 sheet.write(line, 1, move.l10n_latam_document_number)
                 sheet.write(line, 2, datetime.strftime(move.invoice_date, '%d/%m/%Y'))
@@ -220,17 +220,19 @@ class AccountBookReport(models.TransientModel):
                     total_details += abs(move.amount_total_signed)
                 line += 1
             ############ TOTAL POR DOCUMENTO ##########
+            _logger.info('%s Total por Documento' % line)
             sheet.write(line, 0, "Total " + doc_class.name, bold)
             sheet.write(line, 5, amount_docs, bold)
             sheet.write(line, 6, exempt_docs, bold)
             sheet.write(line, 7, tax_docs, bold)
             if self.type_operation in ['sell', 'fee']:
                 sheet.write(line, 8, total_12_docs, bold)
-                sheet.write(line, 8, total_docs, bold)
+                sheet.write(line, 9, total_docs, bold)
             else:
                 sheet.write(line, 8, total_docs, bold)
             line += 1
         ############ TOTAL GENERAL ##########
+        _logger.info('%s Total General' % line)
         sheet.write(line, 0, "Total General", bold)
         sheet.write(line, 5, amount_details, bold)
         sheet.write(line, 6, exempt_details, bold)
