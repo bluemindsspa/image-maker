@@ -93,51 +93,76 @@ class FeeTicketsReport(models.AbstractModel):
         sql_query, parameters = self._prepare_query(options)
         self.env.cr.execute(sql_query, parameters)
         results = self.env.cr.dictfetchall()
+        list_percents = [r['porcent'] for r in results]
+        percents = []
+        for item in list_percents:
+            if item not in percents:
+                percents.append(item)
         correl = 0
-        for line in results:
-            move_id = self.env['account.move'].browse(line['move_id'])
-            # ret = move_id.invoice_line_ids[0].tax_ids[0].filtered(lambda line: 'Impuestos' in line.tax_group_id.name)
-            ret_percent = [l.amount for l in move_id.invoice_line_ids[0].tax_ids if l.tax_group_id.name == 'Impuestos']
-            percent = ret_percent[0] * -1 if ret_percent else 0.00
-            ret = move_id.amount_by_group[0][1] if move_id.amount_by_group else 0
-            line['ret'] = ret
-            invoice_line = move_id.invoice_line_ids
-            # percent = move_id.invoice_line_ids[0].tax_ids[0].amount
-            correl += 1
-            lines.append({
-                'id': line['move_id'],
-                'name': line['nro'],
-                'title_hover': line['nro'],
-                'level': 2,
-                'unfoldable': True,
-                'unfolded': False,
-                # 'colspan': 4,
-                'class': 'o_account_reports_totals_below_sections' if self.env.company.totals_below_sections else '',
-                # 'caret_options': 'account.move.line',
-                # 'parent_id': line['move_id'],
-                'columns': [
-                    {'name': values} for values in [
-                        # line['tipo'],
-                        line['date'],
-                        correl,
-                        line['nro'],
-                        line['partner_vat'],
-                        line['partner_name'],
-                        invoice_line[0].name,
-                        self.format_value(line['bruto']),
-                        line['porcent'] or 0.00,
-                        self.format_value(ret * -1),
-                        self.format_value(line['total'])
-                    ]
-                ],
-            })
+        for p in percents:
+            for line in results:
+                if line['porcent'] == p:
+                    move_id = self.env['account.move'].browse(line['move_id'])
+                    # ret = move_id.invoice_line_ids[0].tax_ids[0].filtered(lambda line: 'Impuestos' in line.tax_group_id.name)
+                    ret_percent = [l.amount for l in move_id.invoice_line_ids[0].tax_ids if l.tax_group_id.name == 'Impuestos']
+                    percent = ret_percent[0] * -1 if ret_percent else 0.00
+                    ret = move_id.amount_by_group[0][1] if move_id.amount_by_group else 0
+                    line['ret'] = ret
+                    invoice_line = move_id.invoice_line_ids
+                    # percent = move_id.invoice_line_ids[0].tax_ids[0].amount
+                    correl += 1
+                    lines.append({
+                        'id': line['move_id'],
+                        'name': line['nro'],
+                        'title_hover': line['nro'],
+                        'level': 3,
+                        'unfoldable': False,
+                        'unfolded': False,
+                        # 'colspan': 4,
+                        'class': 'o_account_reports_totals_below_sections' if self.env.company.totals_below_sections else '',
+                        # 'caret_options': 'account.move.line',
+                        # 'parent_id': line['move_id'],
+                        'columns': [
+                            {'name': values} for values in [
+                                # line['tipo'],
+                                line['date'],
+                                correl,
+                                line['nro'],
+                                line['partner_vat'],
+                                line['partner_name'],
+                                invoice_line[0].name,
+                                self.format_value(line['bruto']),
+                                line['porcent'] or 0.00,
+                                self.format_value(ret * -1),
+                                self.format_value(line['total'])
+                            ]
+                        ],
+                    })
+            if lines:
+                totals = self._calculate_totals_perline(results, p)
+                lines.append({
+                    'id': 'totals_line',
+                    'class': 'total',
+                    'name': _("Total ") + str(p) + '%',
+                    'level': 3,
+                    'columns': [
+                        {'name': values} for values in [
+                            '', '', '', '', '',  '',
+                            self.format_value(totals['bruto']),  '',
+                            self.format_value(totals['ret'] * -1),
+                            self.format_value(totals['total'])
+                        ]
+                    ],
+                    'unfoldable': False,
+                    'unfolded': False
+                })
         if lines:
             totals = self._calculate_totals(results)
             lines.append({
                 'id': 'totals_line',
                 'class': 'total',
-                'name': _("Total"),
-                'level': 2,
+                'name': _("Total General"),
+                'level': 3,
                 'columns': [
                     {'name': values} for values in [
                         '', '', '', '', '',  '',
@@ -149,7 +174,6 @@ class FeeTicketsReport(models.AbstractModel):
                 'unfoldable': False,
                 'unfolded': False
             })
-
         return lines
 
     def _calculate_totals(self, lines):
@@ -161,4 +185,16 @@ class FeeTicketsReport(models.AbstractModel):
         for key in totals.keys():
             for line in lines:
                 totals[key] += line[key]
+        return totals
+
+    def _calculate_totals_perline(self, lines, percent):
+        totals = OrderedDict([
+            ('bruto', 0),
+            ('ret', 0),
+            ('total', 0)
+        ])
+        for key in totals.keys():
+            for line in lines:
+                if line['porcent'] == percent:
+                    totals[key] += line[key]
         return totals
