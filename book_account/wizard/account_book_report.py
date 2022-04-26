@@ -164,7 +164,7 @@ class AccountBookReport(models.TransientModel):
                 moves.append(inv)
         else:
             invoices = self.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '39','56', '61', '110', '112'] and s.journal_id.type == 'sale') if self.type_operation == 'sell' \
-            else self.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '56', '61', '71'] and s.journal_id.type == 'purchase') if self.type_operation == 'buy' \
+            else self.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['33', '34', '56', '61'] and s.journal_id.type == 'purchase') if self.type_operation == 'buy' \
             else self.invoice_ids.filtered(lambda s: s.l10n_latam_document_type_id.code in ['71'] and s.journal_id.type == 'purchase')
             document_class = invoices.mapped("l10n_latam_document_type_id")
             for inv in invoices:
