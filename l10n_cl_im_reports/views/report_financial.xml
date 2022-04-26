@@ -61,4 +61,33 @@
             </t>
         </thead>
     </template>
+
+    <template id="im_report_journal" inherit_id="account.report_journal">
+        <xpath expr="//div[hasclass('page')]" position="before">
+            <div>
+                <span class="col-6" t-esc="(company_id or res_company).name"/>
+            </div>
+            <div>
+                <span class="col-6">RUT: </span><span t-esc="(company_id or res_company).vat"/>
+            </div>
+            <div class="col-6">
+                <span t-esc="(company_id or res_company).street"/>
+            </div>
+            <div class="col-6">
+                <span t-esc="(company_id or res_company).city"/>
+                <span t-esc="(company_id or res_company).state_id.name"/>
+            </div>
+            <div class="col-6">
+                <span t-esc="(company_id or res_company).country_id.name"/>
+            </div>
+            <div>
+                <span class="col-6" t-esc="(company_id or res_company).l10n_cl_activity_description"/>
+            </div>
+            <div>
+                <span style="font-weight:bold;" class="col-6">Fecha desde: </span><span style="font-weight:bold;" t-esc="data['form'].get('date_from')"/>
+                <span style="font-weight:bold;" class="col-6">Fecha hasta: </span><span style="font-weight:bold;" t-esc="data['form'].get('date_to')"/>
+            </div>
+            <div><p> </p></div>
+        </xpath>
+    </template>
 </odoo>
