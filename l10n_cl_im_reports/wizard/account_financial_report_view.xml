@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="im_account_report_print_journal_view" model="ir.ui.view">
+        <field name="name">IM Journals Audit</field>
+        <field name="model">account.print.journal</field>
+        <field name="inherit_id" ref="account_reports.account_report_print_journal_view"/>
+        <field name="arch" type="xml">
+            <button name="check_report" position="after">
+                <button name="export_report_xls" string="Exportar a Excel" type="object" class="oe_highlight"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>
