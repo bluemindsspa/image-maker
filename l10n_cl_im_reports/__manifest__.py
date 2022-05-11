@@ -17,10 +17,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/fee_tickets_report_view.xml',
-<<<<<<< HEAD
         'views/report_financial.xml',
-=======
         'wizard/account_financial_report_view.xml',
->>>>>>> 47767d7... [MOD] Generar reporte excel Auditoría de diarios
     ],
 }
