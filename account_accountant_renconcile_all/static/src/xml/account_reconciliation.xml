@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-extend="reconciliation">
+        <t t-jquery=".o_form_sheet_bg" t-operation="replace">
+            <div class="o_form_sheet_bg">
+                <button class="btn btn-primary oe_validate_all mx-5 my-3">
+                    Validar Todo
+                </button>
+                <div class="o_form_sheet"/>
+            </div>
+        </t>
+    </t>
+
+
+</templates>
