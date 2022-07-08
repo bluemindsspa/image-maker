@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <template id="assets_backend" name="account assets inh" inherit_id="web.assets_backend">
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/account_accountant_renconcile_all/static/src/js/reconciliation_validate_all.js"></script>
+        </xpath>
+    </template>
+
+</odoo>
