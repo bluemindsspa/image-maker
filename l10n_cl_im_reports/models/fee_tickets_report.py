@@ -72,7 +72,7 @@ class FeeTicketsReport(models.AbstractModel):
         AND move.move_type = 'in_invoice'
         AND journal.code = 'BHO'
         AND act.amount <> 0
-        AND COALESCE(move.invoice_date) BETWEEN %s AND %s
+        AND COALESCE(move.date) BETWEEN %s AND %s
         GROUP by act.amount, move.id, move.invoice_date, move.name, partner.vat, partner_name, move.narration, move.amount_untaxed, move.amount_total
         ORDER by act.amount
         """
